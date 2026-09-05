@@ -6,7 +6,7 @@ from sqlalchemy import delete
 from sqlalchemy.orm import Session
 
 from app.core.logger import logger
-from app.db.models import CodeChunk, Repo
+from app.db.models import CodeChunk, File, Repo
 from app.ingestion.chunker import Chunk, chunk_file
 from app.ingestion.cloner import clone_repo
 from app.ingestion.embedder import embed_texts
@@ -61,6 +61,7 @@ def index_repo(db: Session, repo_url: str, task_id: str | None = None) -> Repo:
     existing = db.query(Repo).filter(Repo.url == repo_url).first()
     if existing:
         db.execute(delete(CodeChunk).where(CodeChunk.repo_id == existing.id))
+        db.execute(delete(File).where(File.repo_id == existing.id))
         repo = existing
     else:
         repo = Repo(url=repo_url, name=repo_url.rsplit("/", 1)[-1], status="cloning")
@@ -69,6 +70,7 @@ def index_repo(db: Session, repo_url: str, task_id: str | None = None) -> Repo:
 
     clone = clone_repo(repo_url)
     repo.name = clone.name
+    repo.owner = repo.url.rsplit("/", 1)[0].rsplit("/", 1)[-1] if "/" in repo.url else None
     repo.default_branch = clone.default_branch
     repo.commit_hash = clone.commit_hash
     repo.status = "parsing"
@@ -77,6 +79,16 @@ def index_repo(db: Session, repo_url: str, task_id: str | None = None) -> Repo:
     _update_task(task_id, status="parsing", progress=0.1, message="walking source files")
     sources = list_source_files(clone.repo_dir)
     logger.info("parsing %d files from %s", len(sources), repo_url)
+
+    for source in sources:
+        db.add(
+            File(
+                repo_id=repo.id,
+                path=source.relative_path,
+                language=source.language,
+                content=source.content,
+            )
+        )
 
     chunks: list[Chunk] = []
     for idx, source in enumerate(sources):

@@ -19,6 +19,14 @@ class Settings(BaseSettings):
     github_token: str | None = None
     data_dir: str = "data"
 
+    jwt_secret: str = "dev-secret-change-me"
+    jwt_expiry_hours: int = 24 * 7
+
+    github_client_id: str = ""
+    github_client_secret: str = ""
+    github_redirect_uri: str = "http://localhost:8000/api/auth/github/callback"
+    frontend_url: str = "http://localhost:3000"
+
     top_k_retrieval: int = 20
     final_k: int = 8
     max_agent_iterations: int = 3
