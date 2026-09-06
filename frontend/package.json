@@ -10,25 +10,28 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "lucide-react": "^1.41.0",
     "next": "14.2.*",
     "react": "18.3.*",
     "react-dom": "18.3.*",
     "react-markdown": "^9.0.1",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
+    "jsdom": "^25.0.0",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5",
-    "vitest": "^2.1.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "jsdom": "^25.0.0",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/user-event": "^14.5.0"
+    "vitest": "^2.1.0"
   }
 }

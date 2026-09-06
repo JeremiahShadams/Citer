@@ -5,6 +5,18 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { listRepositories, createRepository, type Repo } from "@/lib/repositories";
 import { pollIndex, type IndexTask } from "@/lib/api";
+import Link from "next/link";
+import {
+  Terminal,
+  GitBranch,
+  ArrowRight,
+  Plus,
+  Search,
+  ExternalLink,
+  Layers,
+  Sparkles,
+  LogOut,
+} from "lucide-react";
 
 export default function DashboardPage() {
   const { user, loading, signOut } = useAuth();
@@ -56,80 +68,158 @@ export default function DashboardPage() {
   if (loading || !user) return null;
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8">
-      <header className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">Codebase Intelligence</h1>
-          <p className="text-sm text-zinc-400">Welcome, {user.name ?? user.email}</p>
-        </div>
+    <main className="min-h-screen bg-void text-zinc-100 font-sans selection:bg-brand-blue/30 selection:text-white">
+      {/* Top Navbar */}
+      <header className="border-b border-hairline bg-surface-0 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <a href="/chat" className="text-sm text-blue-400 hover:text-blue-300">Chat</a>
-          <button onClick={signOut} className="text-sm text-zinc-400 hover:text-zinc-200">
-            Sign out
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="flex h-6 w-6 items-center justify-center rounded border border-brand-blue/40 bg-brand-blue/10 text-brand-blue">
+              <Terminal className="h-3.5 w-3.5" />
+            </div>
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-white">
+              Codebase <span className="text-brand-blue">Intelligence</span>
+            </span>
+          </Link>
+          <span className="text-zinc-600">/</span>
+          <span className="text-xs font-mono text-zinc-400">Repositories</span>
+        </div>
+
+        <div className="flex items-center gap-4 text-xs font-mono">
+          <Link href="/eval" className="text-zinc-400 hover:text-white transition-colors">
+            Evaluations
+          </Link>
+          <span className="text-zinc-500">
+            {user.name ?? user.email}
+          </span>
+          <button
+            onClick={signOut}
+            className="flex items-center gap-1 text-zinc-500 hover:text-red-400 transition-colors"
+            title="Sign out"
+          >
+            <LogOut className="h-3.5 w-3.5" />
           </button>
         </div>
       </header>
 
-      <section className="mb-8 rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-        <h2 className="mb-3 text-sm font-semibold text-zinc-300">Connect a Repository</h2>
-        <div className="flex gap-2">
-          <input
-            className="flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm"
-            placeholder="https://github.com/owner/repo"
-            value={repoUrl}
-            onChange={(e) => setRepoUrl(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleConnect()}
-          />
-          <button
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium hover:bg-blue-500 disabled:opacity-50"
-            onClick={handleConnect}
-            disabled={busy || !repoUrl.trim()}
-          >
-            {busy ? "Indexing..." : "Connect"}
-          </button>
-        </div>
-        {indexStatus && <p className="mt-2 text-xs text-zinc-400">{indexStatus}</p>}
-      </section>
-
-      <section>
-        <h2 className="mb-3 text-sm font-semibold text-zinc-300">Your Repositories</h2>
-        {repos.length === 0 ? (
-          <p className="rounded border border-zinc-800 p-4 text-sm text-zinc-500">
-            No repositories connected yet. Paste a GitHub URL above to get started.
+      {/* Main Content Area */}
+      <div className="mx-auto max-w-5xl px-6 py-10 space-y-10">
+        {/* Welcome Header */}
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            Your Codebases
+          </h1>
+          <p className="mt-1 text-xs sm:text-sm text-zinc-400 font-sans">
+            Connect any public or private GitHub repository to build a structural AST graph and launch AI investigations.
           </p>
-        ) : (
-          <ul className="space-y-2">
-            {repos.map((repo) => (
-              <li key={repo.id}>
-                <button
+        </div>
+
+        {/* Connect Repository Card */}
+        <section className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-xl">
+          <div className="flex items-center gap-2 font-mono text-xs text-brand-blue uppercase tracking-wider mb-3">
+            <Plus className="h-3.5 w-3.5" />
+            <span>Connect Repository</span>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2.5">
+            <input
+              className="flex-1 rounded-lg border border-hairline bg-surface-0 px-4 py-2.5 font-mono text-xs text-white placeholder-zinc-500 focus:border-brand-blue focus:outline-none"
+              placeholder="https://github.com/owner/repository"
+              value={repoUrl}
+              onChange={(e) => setRepoUrl(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleConnect()}
+            />
+            <button
+              className="flex items-center justify-center gap-2 rounded-lg bg-brand-blue px-6 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-600 disabled:opacity-50 transition-all shadow-md"
+              onClick={handleConnect}
+              disabled={busy || !repoUrl.trim()}
+            >
+              <span>{busy ? "Indexing..." : "Connect"}</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+          {indexStatus && (
+            <div className="mt-3 flex items-center gap-2 font-mono text-xs text-zinc-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
+              <span>Status: {indexStatus}</span>
+            </div>
+          )}
+        </section>
+
+        {/* Repositories List */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400">
+              Connected Repositories ({repos.length})
+            </h2>
+          </div>
+
+          {repos.length === 0 ? (
+            <div className="rounded-xl border border-hairline bg-surface-1/40 p-8 text-center text-xs font-mono text-zinc-500">
+              No repositories connected yet. Paste a GitHub repository URL above to index.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {repos.map((repo) => (
+                <div
+                  key={repo.id}
                   onClick={() => router.push(`/repo/${repo.id}`)}
-                  className="flex w-full items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900 p-4 text-left hover:border-zinc-600"
+                  className="group cursor-pointer rounded-xl border border-hairline bg-surface-1 p-5 hover:border-hairline-bright hover:bg-surface-2 transition-all shadow-md flex flex-col justify-between"
                 >
                   <div>
-                    <span className="font-medium">{repo.owner}/{repo.name}</span>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <GitBranch className="h-4 w-4 text-brand-blue" />
+                        <span className="font-mono text-sm font-semibold text-white group-hover:text-brand-cyan transition-colors">
+                          {repo.owner}/{repo.name}
+                        </span>
+                      </div>
+                      <StatusBadge status={repo.status} />
+                    </div>
+
                     {repo.description && (
-                      <span className="ml-2 text-sm text-zinc-400">{repo.description}</span>
+                      <p className="text-xs text-zinc-400 font-sans line-clamp-2 mb-4">
+                        {repo.description}
+                      </p>
                     )}
                   </div>
-                  <StatusBadge status={repo.status} />
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+
+                  <div className="pt-4 border-t border-hairline flex items-center justify-between font-mono text-[11px] text-zinc-500">
+                    <span>
+                      {repo.stats ? `${repo.stats.files} files · ${repo.stats.chunks} chunks` : "Ready"}
+                    </span>
+                    <span className="text-brand-blue flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      <span>Open Workspace</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
     </main>
   );
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const color =
-    status === "ready"
-      ? "bg-green-900 text-green-300"
-      : status === "failed"
-        ? "bg-red-900 text-red-300"
-        : "bg-yellow-900 text-yellow-300";
+  const isReady = status === "ready";
+  const isFailed = status === "failed";
   return (
-    <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${color}`}>{status}</span>
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider ${
+        isReady
+          ? "bg-emerald-950/60 text-emerald-400 border border-emerald-900/50"
+          : isFailed
+          ? "bg-red-950/60 text-red-400 border border-red-900/50"
+          : "bg-amber-950/60 text-amber-400 border border-amber-900/50 animate-pulse"
+      }`}
+    >
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${
+          isReady ? "bg-emerald-400" : isFailed ? "bg-red-400" : "bg-amber-400"
+        }`}
+      />
+      <span>{status}</span>
+    </span>
   );
 }
