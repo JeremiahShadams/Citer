@@ -184,7 +184,7 @@ export default function DashboardPage() {
 
                   <div className="pt-4 border-t border-hairline flex items-center justify-between font-mono text-[11px] text-zinc-500">
                     <span>
-                      {repo.stats ? `${repo.stats.files} files · ${repo.stats.chunks} chunks` : "Ready"}
+                      {repo.default_branch ? `branch: ${repo.default_branch}` : "Repository ready"}
                     </span>
                     <span className="text-brand-blue flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       <span>Open Workspace</span>
