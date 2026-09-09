@@ -61,31 +61,31 @@ export default function ChatWindow({
           <Message key={i} message={m} />
         ))}
         {loading && (
-          <div className="rounded-lg bg-zinc-800 px-4 py-3">
+          <div className="rounded-lg bg-surface-1 border border-hairline px-4 py-3">
             {steps.length > 0 && (
-              <div className="mb-1 text-xs text-zinc-400">
+              <div className="mb-1 text-xs text-zinc-400 font-mono">
                 {steps.map((s) => (
                   <span key={s} className="mr-2">
-                    <span className="text-blue-400">▸</span> {s}
+                    <span className="text-zinc-500">&bull;</span> {s}
                   </span>
                 ))}
               </div>
             )}
             <p className="whitespace-pre-wrap text-zinc-100">{liveAnswer}</p>
-            {liveAnswer === "" && <span className="text-sm text-zinc-500">Thinking...</span>}
+            {liveAnswer === "" && <span className="text-sm text-zinc-500 font-mono">Searching codebase...</span>}
           </div>
         )}
       </div>
-      <div className="flex gap-2 border-t border-zinc-800 py-3">
+      <div className="flex gap-2 border-t border-hairline py-3">
         <input
-          className="flex-1 rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm"
+          className="flex-1 rounded-md border border-hairline bg-surface-1 px-3 py-2 text-sm text-white placeholder-zinc-500 focus:border-zinc-500 focus:outline-none"
           placeholder="Ask about the codebase..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
         />
         <button
-          className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium hover:bg-blue-500"
+          className="rounded-md bg-white text-zinc-950 px-4 py-2 text-sm font-medium hover:bg-zinc-200 disabled:opacity-50 transition-colors"
           onClick={send}
           disabled={loading}
         >

@@ -71,16 +71,15 @@ export default function CitationIlluminationDemo() {
       <div className="mx-auto max-w-5xl px-4">
         {/* Section Header */}
         <div className="mb-12 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">
-            <Sparkles className="h-3.5 w-3.5" />
-            Evidence-First UX
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-zinc-400 uppercase tracking-widest mb-3">
+            <FileCode className="h-3.5 w-3.5 text-zinc-400" />
+            Verification Engine
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            The AI shows you why it believes something.
+            Every statement backed by exact source lines.
           </h2>
-          <p className="mt-2 text-zinc-400 max-w-xl text-sm">
-            Hover over a citation to illuminate the precise line spans. The
-            surrounding code dims, bringing ground truth into immediate focus.
+          <p className="mt-2 text-zinc-400 max-w-xl text-sm font-sans">
+            Select a citation to inspect the illuminated line spans. The surrounding code dims, isolating exact ground truth in the repository.
           </p>
         </div>
 
@@ -90,18 +89,18 @@ export default function CitationIlluminationDemo() {
           <div className="lg:col-span-5 space-y-4">
             <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-lg">
               <div className="font-mono text-xs text-zinc-500 uppercase tracking-wider mb-2">
-                Investigation Output
+                Verified Output
               </div>
-              <p className="text-sm text-zinc-200 leading-relaxed">
+              <p className="text-sm text-zinc-200 leading-relaxed font-sans">
                 Authentication relies on high-speed edge token inspection in{" "}
-                <span className="text-brand-blue font-mono">middleware.ts</span>{" "}
+                <span className="text-white font-mono bg-surface-2 px-1.5 py-0.5 rounded">middleware.ts</span>{" "}
                 and database-backed session creation in{" "}
-                <span className="text-brand-blue font-mono">auth.ts</span>.
+                <span className="text-white font-mono bg-surface-2 px-1.5 py-0.5 rounded">auth.ts</span>.
               </p>
 
               <div className="mt-6 border-t border-hairline pt-4">
                 <div className="text-xs font-mono text-zinc-400 mb-3">
-                  Click a citation to illuminate evidence:
+                  Select citation to inspect:
                 </div>
                 <div className="space-y-2">
                   {CITATION_EXAMPLES.map((ex, i) => {
@@ -112,20 +111,20 @@ export default function CitationIlluminationDemo() {
                         onClick={() => setActiveIdx(i)}
                         className={`w-full text-left rounded-lg border p-3.5 transition-all ${
                           isSelected
-                            ? "border-brand-blue/70 bg-brand-blue/10 shadow-md"
-                            : "border-hairline bg-surface-2/60 hover:border-hairline-bright"
+                            ? "border-zinc-500 bg-zinc-800 text-white shadow-md"
+                            : "border-hairline bg-surface-2/60 text-zinc-300 hover:border-zinc-600"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 font-mono text-xs text-zinc-100 font-semibold">
-                            <FileCode className="h-3.5 w-3.5 text-brand-blue" />
+                          <div className="flex items-center gap-2 font-mono text-xs font-semibold text-white">
+                            <FileCode className="h-3.5 w-3.5 text-zinc-400" />
                             <span>{ex.file}</span>
-                            <span className="text-brand-cyan">:{ex.lines}</span>
+                            <span className="text-zinc-400">:{ex.lines}</span>
                           </div>
                           {isSelected && (
-                            <span className="flex items-center gap-1 font-mono text-[10px] text-brand-blue uppercase">
+                            <span className="flex items-center gap-1 font-mono text-[10px] text-zinc-300 uppercase">
                               <Check className="h-3 w-3" />
-                              Illuminated
+                              Inspecting
                             </span>
                           )}
                         </div>
@@ -146,13 +145,13 @@ export default function CitationIlluminationDemo() {
               {/* Code Viewer Header */}
               <div className="flex items-center justify-between border-b border-hairline bg-surface-1 px-4 py-2.5">
                 <div className="flex items-center gap-2 font-mono text-xs text-zinc-300">
-                  <FileCode className="h-3.5 w-3.5 text-brand-blue" />
+                  <FileCode className="h-3.5 w-3.5 text-zinc-400" />
                   <span>{activeExample.file}</span>
                   <span className="rounded bg-surface-3 px-1.5 py-0.5 text-[10px] text-zinc-400">
                     TypeScript
                   </span>
                 </div>
-                <div className="font-mono text-[11px] text-brand-cyan">
+                <div className="font-mono text-[11px] text-zinc-400">
                   Lines {activeExample.lines} cited
                 </div>
               </div>
@@ -164,9 +163,9 @@ export default function CitationIlluminationDemo() {
                     {activeExample.snippet.map((row) => (
                       <tr
                         key={row.lineNum}
-                        className={`transition-all duration-300 ${
+                        className={`transition-all duration-200 ${
                           row.isCited
-                            ? "bg-brand-blue/15 border-l-2 border-brand-blue"
+                            ? "bg-zinc-800/90 border-l-2 border-white text-white"
                             : "opacity-35 hover:opacity-75"
                         }`}
                       >
@@ -187,7 +186,7 @@ export default function CitationIlluminationDemo() {
               {/* Inspector Status Footer */}
               <div className="border-t border-hairline bg-surface-1 px-4 py-2 text-[11px] font-mono text-zinc-500 flex items-center justify-between">
                 <span>Symbol: {activeExample.symbol}</span>
-                <span className="text-brand-blue font-semibold">100% Verified in Repo</span>
+                <span className="text-emerald-400 font-medium">Verified in Repo</span>
               </div>
             </div>
           </div>

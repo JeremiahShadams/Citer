@@ -11,6 +11,7 @@ describe("CodeInspector", () => {
 
   it("renders code lines and highlights target range", () => {
     const file = {
+      repo_id: 1,
       path: "src/auth.ts",
       language: "typescript",
       content: "line 1\nline 2\nline 3\nline 4\nline 5",

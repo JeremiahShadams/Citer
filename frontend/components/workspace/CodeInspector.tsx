@@ -52,7 +52,7 @@ export default function CodeInspector({
         {/* Sticky Header */}
         <div className="flex items-center justify-between border-b border-hairline bg-surface-1 px-4 py-2.5 shrink-0">
           <div className="flex items-center gap-2">
-            <FileCode className="h-4 w-4 text-brand-blue" />
+            <FileCode className="h-4 w-4 text-zinc-400" />
             <span className="font-semibold text-zinc-200">{file.path}</span>
             {file.language && (
               <span className="rounded bg-surface-3 px-1.5 py-0.5 text-[10px] text-zinc-400 uppercase">
@@ -60,8 +60,8 @@ export default function CodeInspector({
               </span>
             )}
             {highlightRange && (
-              <span className="flex items-center gap-1.5 rounded-full bg-brand-blue/20 px-2 py-0.5 text-[10px] text-brand-cyan border border-brand-blue/40">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
+              <span className="flex items-center gap-1.5 rounded-full bg-zinc-800 px-2.5 py-0.5 text-[10px] text-zinc-200 border border-zinc-700">
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
                 Lines {highlightRange.start}–{highlightRange.end} illuminated
                 {onClearHighlight && (
                   <button
@@ -87,12 +87,12 @@ export default function CodeInspector({
               onClick={() => setShowIntelligence((prev) => !prev)}
               className={`flex items-center gap-1 rounded border px-2.5 py-1 text-[11px] transition-colors ${
                 showIntelligence
-                  ? "border-brand-blue/60 bg-brand-blue/15 text-brand-cyan"
+                  ? "border-zinc-500 bg-zinc-800 text-white"
                   : "border-hairline bg-surface-2 text-zinc-400 hover:text-white"
               }`}
             >
               <Layers className="h-3 w-3" />
-              <span>Telemetry</span>
+              <span>Details</span>
             </button>
           </div>
         </div>
@@ -115,9 +115,9 @@ export default function CodeInspector({
                     id={`L${lineNum}`}
                     className={`transition-colors duration-150 ${
                       isTargetLine
-                        ? "bg-brand-blue/20 border-l-2 border-brand-blue"
+                        ? "bg-zinc-800/90 border-l-2 border-white text-white"
                         : isDimmed
-                        ? "opacity-40 hover:opacity-85"
+                        ? "opacity-35 hover:opacity-85"
                         : "hover:bg-surface-1/50"
                     }`}
                   >
@@ -137,12 +137,12 @@ export default function CodeInspector({
         </div>
       </div>
 
-      {/* File Intelligence Sidebar */}
+      {/* File Details Sidebar */}
       {showIntelligence && (
         <aside className="w-64 shrink-0 bg-surface-1 p-4 overflow-y-auto hidden md:block">
           <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-4 flex items-center gap-1.5">
-            <Layers className="h-3.5 w-3.5 text-brand-blue" />
-            <span>File Intelligence</span>
+            <Layers className="h-3.5 w-3.5 text-zinc-400" />
+            <span>File Details</span>
           </div>
 
           <div className="space-y-4">
@@ -164,23 +164,23 @@ export default function CodeInspector({
 
             <div className="rounded-lg border border-hairline bg-surface-0 p-3">
               <div className="text-[10px] text-zinc-500 uppercase mb-2 flex items-center gap-1">
-                <FunctionSquare className="h-3 w-3 text-brand-cyan" />
-                <span>Detected Symbols</span>
+                <FunctionSquare className="h-3 w-3 text-zinc-400" />
+                <span>Symbols</span>
               </div>
               <div className="space-y-1.5 text-[11px]">
                 <div className="text-zinc-300 font-semibold truncate">
                   {file.path.split("/").pop()}
                 </div>
                 <div className="text-[10px] text-zinc-500">
-                  Parsed via Tree-sitter AST
+                  Tree-sitter AST
                 </div>
               </div>
             </div>
 
             <div className="rounded-lg border border-hairline bg-surface-0 p-3">
               <div className="text-[10px] text-zinc-500 uppercase mb-2 flex items-center gap-1">
-                <Users className="h-3 w-3 text-brand-violet" />
-                <span>Call Graph</span>
+                <Users className="h-3 w-3 text-zinc-400" />
+                <span>References</span>
               </div>
               <div className="text-[11px] text-zinc-400 space-y-1">
                 <div>Incoming callers: <span className="text-white font-bold">12</span></div>

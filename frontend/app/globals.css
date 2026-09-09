@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --bg-void: #060608;
+    --bg-void: #08080a;
     --text-primary: #ededf2;
     --text-muted: #8b8b9e;
   }
 
   body {
-    background-color: #060608;
+    background-color: #08080a;
     color: #ededf2;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
@@ -18,7 +18,7 @@
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.25);
+    background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
   }
 }
@@ -39,7 +39,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #323246;
+  background: #383848;
 }
 
 /* Technical grid patterns */
@@ -52,16 +52,7 @@
 
 .bg-tech-dots {
   background-size: 24px 24px;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-}
-
-/* Restrained glow effects */
-.glow-cobalt {
-  box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.2);
-}
-
-.glow-violet {
-  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.2);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
 /* Terminal blink cursor */
@@ -73,8 +64,8 @@
 .terminal-cursor {
   display: inline-block;
   width: 7px;
-  height: 15px;
-  background-color: #3b82f6;
+  height: 14px;
+  background-color: #ededf2;
   margin-left: 2px;
   vertical-align: middle;
   animation: cursorBlink 1s infinite;

@@ -14,7 +14,7 @@ export type ChatMessage = {
 export default function Message({ message }: { message: ChatMessage }) {
   return (
     <div className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-[85%] rounded-lg px-4 py-3 ${message.role === "user" ? "bg-blue-600" : "bg-zinc-800"}`}>
+      <div className={`max-w-[85%] rounded-lg px-4 py-3 ${message.role === "user" ? "bg-zinc-800 text-zinc-100 border border-zinc-700" : "bg-zinc-900 border border-hairline"}`}>
         {message.role === "assistant" ? (
           <>
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
@@ -40,13 +40,13 @@ function CitationBlock({ citation }: { citation: Citation }) {
   return (
     <div className="mb-1">
       <button
-        className="text-xs text-blue-400 underline hover:text-blue-300"
+        className="text-xs text-zinc-300 underline hover:text-white"
         onClick={() => setOpen((o) => !o)}
       >
         {citation.file_path}:{citation.start_line}-{citation.end_line}
       </button>
       {open && (
-        <pre className="mt-1 overflow-x-auto rounded bg-zinc-900 p-2 text-xs text-zinc-300">
+        <pre className="mt-1 overflow-x-auto rounded bg-zinc-950 p-2 text-xs text-zinc-300 border border-hairline">
           {citation.snippet}
         </pre>
       )}

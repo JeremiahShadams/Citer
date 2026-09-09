@@ -37,7 +37,7 @@ export default function LoginPage() {
         )}
 
         <button
-          className="w-full rounded-md bg-blue-600 px-4 py-2.5 font-medium hover:bg-blue-500 disabled:opacity-50"
+          className="w-full rounded-md bg-white px-4 py-2.5 font-medium text-zinc-950 hover:bg-zinc-200 disabled:opacity-50 transition-colors"
           onClick={handleDevLogin}
           disabled={busy}
         >

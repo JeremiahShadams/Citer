@@ -37,7 +37,7 @@ export default function RepoInput({
         onChange={(e) => onChange(e.target.value)}
       />
       <button
-        className="rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium hover:bg-blue-500 disabled:opacity-50"
+        className="rounded-md bg-white px-3 py-1.5 text-sm font-medium text-zinc-950 hover:bg-zinc-200 disabled:opacity-50 transition-colors"
         onClick={handleIndex}
         disabled={busy || !value}
       >

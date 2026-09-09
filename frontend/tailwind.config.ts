@@ -5,23 +5,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        void: "#060608",
+        void: "#08080a",
         surface: {
-          0: "#09090c",
-          1: "#0e0e14",
-          2: "#14141d",
-          3: "#1c1c28",
+          0: "#0b0b0e",
+          1: "#111115",
+          2: "#17171d",
+          3: "#202028",
         },
         hairline: {
-          subtle: "#191924",
-          DEFAULT: "#232332",
-          bright: "#323246",
-        },
-        brand: {
-          blue: "#3b82f6",
-          indigo: "#6366f1",
-          violet: "#8b5cf6",
-          cyan: "#06b6d4",
+          subtle: "#1c1c24",
+          DEFAULT: "#272732",
+          bright: "#383848",
         },
       },
       fontFamily: {

@@ -14,21 +14,12 @@ import {
 import InvestigationStream from "@/components/workspace/InvestigationStream";
 import CodeInspector from "@/components/workspace/CodeInspector";
 import CommandPalette from "@/components/workspace/CommandPalette";
-import ArchitectureModeDemo from "@/components/landing/ArchitectureModeDemo";
-import CodeGalaxyScene from "@/components/3d/CodeGalaxyScene";
 import {
   Folder,
   FileCode,
   Search,
-  Layers,
-  Sparkles,
-  Terminal,
   ArrowLeft,
-  Share2,
-  SlidersHorizontal,
 } from "lucide-react";
-
-type ViewMode = "cockpit" | "architecture" | "galaxy";
 
 export default function RepoWorkspacePage() {
   const { user, loading } = useAuth();
@@ -41,7 +32,6 @@ export default function RepoWorkspacePage() {
   const [activeFile, setActiveFile] = useState<FileContent | null>(null);
   const [openFile, setOpenFile] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<ViewMode>("cockpit");
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [fileFilter, setFileFilter] = useState("");
   const [highlightRange, setHighlightRange] = useState<{ start: number; end: number } | null>(null);
@@ -74,7 +64,6 @@ export default function RepoWorkspacePage() {
   }
 
   const handleSelectCitation = async (filePath: string, startLine?: number, endLine?: number) => {
-    if (viewMode !== "cockpit") setViewMode("cockpit");
     await handleOpenFile(filePath, startLine, endLine);
   };
 
@@ -109,41 +98,9 @@ export default function RepoWorkspacePage() {
           </div>
         </div>
 
-        {/* Center View Mode Switcher */}
-        <div className="flex items-center rounded-lg border border-hairline bg-surface-1 p-0.5 text-xs font-mono">
-          <button
-            onClick={() => setViewMode("cockpit")}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
-              viewMode === "cockpit"
-                ? "bg-surface-3 text-white shadow-sm font-semibold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
-          >
-            <Terminal className="h-3.5 w-3.5 text-brand-blue" />
-            <span className="hidden sm:inline">Cockpit</span>
-          </button>
-          <button
-            onClick={() => setViewMode("architecture")}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
-              viewMode === "architecture"
-                ? "bg-surface-3 text-white shadow-sm font-semibold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
-          >
-            <Layers className="h-3.5 w-3.5 text-brand-violet" />
-            <span className="hidden sm:inline">Architecture</span>
-          </button>
-          <button
-            onClick={() => setViewMode("galaxy")}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all ${
-              viewMode === "galaxy"
-                ? "bg-surface-3 text-white shadow-sm font-semibold"
-                : "text-zinc-400 hover:text-zinc-200"
-            }`}
-          >
-            <Sparkles className="h-3.5 w-3.5 text-brand-cyan" />
-            <span className="hidden sm:inline">3D Galaxy</span>
-          </button>
+        {/* Center Breadcrumb */}
+        <div className="hidden sm:flex items-center text-xs font-mono text-zinc-400">
+          <span>Repository Workspace</span>
         </div>
 
         {/* Right Search & Actions */}
@@ -161,85 +118,65 @@ export default function RepoWorkspacePage() {
         </div>
       </header>
 
-      {/* Main Workspace Body */}
+      {/* Main Workspace Body: 3-Panel Cockpit */}
       <div className="flex-1 flex overflow-hidden">
-        {viewMode === "cockpit" && (
-          <>
-            {/* Panel 1 (Left): File Tree & Repository Outline */}
-            <aside className="w-64 shrink-0 border-r border-hairline bg-surface-0 flex flex-col overflow-hidden select-none">
-              {/* Filter Search */}
-              <div className="p-2.5 border-b border-hairline">
-                <input
-                  type="text"
-                  placeholder="Filter repository..."
-                  value={fileFilter}
-                  onChange={(e) => setFileFilter(e.target.value)}
-                  className="w-full rounded border border-hairline bg-surface-1 px-2.5 py-1 font-mono text-xs text-zinc-200 placeholder-zinc-500 focus:border-brand-blue focus:outline-none"
-                />
-              </div>
-
-              {/* File Nodes Tree */}
-              <div className="flex-1 overflow-y-auto p-2 font-mono text-xs">
-                {tree.length === 0 && (
-                  <p className="p-3 text-[11px] text-zinc-600">
-                    No files indexed yet
-                  </p>
-                )}
-                {tree.map((entry) => (
-                  <FileNode
-                    key={entry.name}
-                    entry={entry}
-                    depth={0}
-                    onSelect={(p) => handleOpenFile(p)}
-                    activePath={openFile}
-                    filter={fileFilter}
-                  />
-                ))}
-              </div>
-
-              {/* Telemetry Footer */}
-              <div className="border-t border-hairline bg-surface-1 p-2 font-mono text-[10px] text-zinc-500 flex justify-between">
-                <span>Branch: main</span>
-                <span className="text-emerald-400">AST Indexed</span>
-              </div>
-            </aside>
-
-            {/* Panel 2 (Center): AI Investigation Stream */}
-            <div className="w-[440px] shrink-0 border-r border-hairline flex flex-col overflow-hidden">
-              <InvestigationStream
-                repoUrl={repo.url}
-                sessionId={sessionId}
-                onSessionChange={setSessionId}
-                onSelectCitation={handleSelectCitation}
-              />
-            </div>
-
-            {/* Panel 3 (Right): Code Inspector with Line Illumination */}
-            <div className="flex-1 flex flex-col overflow-hidden bg-surface-0">
-              <CodeInspector
-                file={activeFile}
-                highlightRange={highlightRange}
-                onClearHighlight={() => setHighlightRange(null)}
-              />
-            </div>
-          </>
-        )}
-
-        {viewMode === "architecture" && (
-          <div className="flex-1 overflow-y-auto p-6 bg-void">
-            <ArchitectureModeDemo />
+        {/* Panel 1 (Left): File Tree & Repository Outline */}
+        <aside className="w-64 shrink-0 border-r border-hairline bg-surface-0 flex flex-col overflow-hidden select-none">
+          {/* Filter Search */}
+          <div className="p-2.5 border-b border-hairline">
+            <input
+              type="text"
+              placeholder="Filter files..."
+              value={fileFilter}
+              onChange={(e) => setFileFilter(e.target.value)}
+              className="w-full rounded border border-hairline bg-surface-1 px-2.5 py-1 font-mono text-xs text-zinc-200 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none"
+            />
           </div>
-        )}
 
-        {viewMode === "galaxy" && (
-          <div className="relative flex-1 bg-void overflow-hidden">
-            <CodeGalaxyScene interactive={true} />
-            <div className="absolute top-4 left-4 z-20 font-mono text-xs text-zinc-400 bg-surface-1/80 border border-hairline p-3 rounded-lg backdrop-blur-md">
-              <div className="text-white font-semibold mb-1">Interactive 3D Galaxy</div>
-              <div>Hover nodes to inspect symbol callers and file dependencies.</div>
-            </div>
+          {/* File Nodes Tree */}
+          <div className="flex-1 overflow-y-auto p-2 font-mono text-xs">
+            {tree.length === 0 && (
+              <p className="p-3 text-[11px] text-zinc-600">
+                No files indexed yet
+              </p>
+            )}
+            {tree.map((entry) => (
+              <FileNode
+                key={entry.name}
+                entry={entry}
+                depth={0}
+                onSelect={(p) => handleOpenFile(p)}
+                activePath={openFile}
+                filter={fileFilter}
+              />
+            ))}
           </div>
-        )}
+
+          {/* Telemetry Footer */}
+          <div className="border-t border-hairline bg-surface-1 p-2 font-mono text-[10px] text-zinc-500 flex justify-between">
+            <span>Branch: main</span>
+            <span className="text-emerald-400">Indexed</span>
+          </div>
+        </aside>
+
+        {/* Panel 2 (Center): Q&A Stream */}
+        <div className="w-[440px] shrink-0 border-r border-hairline flex flex-col overflow-hidden">
+          <InvestigationStream
+            repoUrl={repo.url}
+            sessionId={sessionId}
+            onSessionChange={setSessionId}
+            onSelectCitation={handleSelectCitation}
+          />
+        </div>
+
+        {/* Panel 3 (Right): Code Inspector with Line Illumination */}
+        <div className="flex-1 flex flex-col overflow-hidden bg-surface-0">
+          <CodeInspector
+            file={activeFile}
+            highlightRange={highlightRange}
+            onClearHighlight={() => setHighlightRange(null)}
+          />
+        </div>
       </div>
 
       {/* Global ⌘K Command Palette */}
@@ -278,7 +215,7 @@ function FileNode({
         onClick={() => onSelect(entry.name)}
         className={`flex items-center gap-1.5 w-full text-left rounded px-2 py-1 text-xs transition-colors ${
           isActive
-            ? "bg-brand-blue/20 text-white font-semibold border-l-2 border-brand-blue"
+            ? "bg-zinc-800 text-white font-medium border-l-2 border-white"
             : "text-zinc-400 hover:bg-surface-2 hover:text-zinc-200"
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
@@ -297,7 +234,7 @@ function FileNode({
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >
         <span className="text-zinc-600 text-[10px] w-3">{open ? "▾" : "▸"}</span>
-        <Folder className="h-3.5 w-3.5 shrink-0 text-brand-blue/70" />
+        <Folder className="h-3.5 w-3.5 shrink-0 text-zinc-500" />
         <span className="truncate">{entry.name}</span>
       </button>
       {open &&
