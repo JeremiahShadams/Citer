@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     openai_embedding_model: str = "text-embedding-3-large"
     embedding_dim: int = 1536
 
+    anthropic_api_key: str = ""
+    anthropic_model: str = "claude-3-5-sonnet-20241022"
+
     database_url: str = "postgresql+psycopg://codeqa:codeqa@localhost:5432/codeqa"
     redis_url: str = "redis://localhost:6379/0"
 

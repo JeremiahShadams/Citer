@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-void: #060608;
+    --text-primary: #ededf2;
+    --text-muted: #8b8b9e;
+  }
+
+  body {
+    background-color: #060608;
+    color: #ededf2;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(59, 130, 246, 0.25);
+    color: #ffffff;
+  }
+}
+
+/* Responsive safeguards for dense technical demos */
+html, body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+  section {
+    scroll-margin-top: 5rem;
+  }
+
+  .overflow-x-auto {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre, code {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  table {
+    min-width: 34rem;
+  }
+
+  .bg-tech-grid {
+    background-size: 24px 24px;
+  }
+
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom minimal dark scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232332;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #323246;
+}
+
+/* Technical grid patterns */
+.bg-tech-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-tech-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Restrained glow effects */
+.glow-cobalt {
+  box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.2);
+}
+
+.glow-violet {
+  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.2);
+}
+
+/* Terminal blink cursor */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  background-color: #3b82f6;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: cursorBlink 1s infinite;
+}
