@@ -42,7 +42,7 @@ export default function ImpossibleQuestions() {
       <div className="mx-auto max-w-5xl px-4">
         {/* Header */}
         <div className="mb-16 text-center">
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-blue uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-hover uppercase tracking-widest mb-3">
             <HelpCircle className="h-3.5 w-3.5" />
             Repository Reasoning
           </div>
@@ -67,13 +67,13 @@ export default function ImpossibleQuestions() {
                 <span className="rounded bg-surface-3 px-2.5 py-0.5 font-mono text-[11px] text-zinc-400 uppercase tracking-wider">
                   {q.category}
                 </span>
-                <span className="font-mono text-xs text-brand-cyan flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="font-mono text-xs text-brand-accent flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   {q.reasoningType}
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>
               </div>
 
-              <h3 className="text-lg font-semibold text-white mb-4 leading-snug group-hover:text-brand-blue transition-colors">
+              <h3 className="text-lg font-semibold text-white mb-4 leading-snug group-hover:text-brand-hover transition-colors">
                 &ldquo;{q.question}&rdquo;
               </h3>
 

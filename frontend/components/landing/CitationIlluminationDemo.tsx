@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, FileCode, Check, ArrowRight } from "lucide-react";
+import { Sparkles, FileCode, Check } from "lucide-react";
 
 type CitationExample = {
   id: string;
@@ -22,7 +22,7 @@ const CITATION_EXAMPLES: CitationExample[] = [
     symbol: "export async function middleware()",
     lineStart: 12,
     lineEnd: 20,
-    explanation: "Enforces session validation at edge before routing to dashboard.",
+    explanation: "Enforces edge cryptographic session validation before routing to dashboard.",
     snippet: [
       { lineNum: 10, code: "import { getSession } from '@/lib/session';", isCited: false },
       { lineNum: 11, code: "", isCited: false },
@@ -46,7 +46,7 @@ const CITATION_EXAMPLES: CitationExample[] = [
     symbol: "AuthService.createSession()",
     lineStart: 28,
     lineEnd: 34,
-    explanation: "Issues cryptographically signed token and persists session store record.",
+    explanation: "Issues cryptographically signed token and persists session store record in Postgres.",
     snippet: [
       { lineNum: 26, code: "export class AuthService {", isCited: false },
       { lineNum: 27, code: "  static async createSession(userId: string): Promise<Session> {", isCited: false },
@@ -71,7 +71,7 @@ export default function CitationIlluminationDemo() {
       <div className="mx-auto max-w-5xl px-4">
         {/* Section Header */}
         <div className="mb-12 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-hover uppercase tracking-widest mb-3">
             <Sparkles className="h-3.5 w-3.5" />
             Evidence-First UX
           </div>
@@ -79,8 +79,7 @@ export default function CitationIlluminationDemo() {
             The AI shows you why it believes something.
           </h2>
           <p className="mt-2 text-zinc-400 max-w-xl text-sm">
-            Hover over a citation to illuminate the precise line spans. The
-            surrounding code dims, bringing ground truth into immediate focus.
+            Select a citation to spotlight the precise line spans. The surrounding code aggressively dims, bringing ground truth into immediate focus.
           </p>
         </div>
 
@@ -94,100 +93,105 @@ export default function CitationIlluminationDemo() {
               </div>
               <p className="text-sm text-zinc-200 leading-relaxed">
                 Authentication relies on high-speed edge token inspection in{" "}
-                <span className="text-brand-blue font-mono">middleware.ts</span>{" "}
+                <span className="text-brand-hover font-mono">middleware.ts</span>{" "}
                 and database-backed session creation in{" "}
-                <span className="text-brand-blue font-mono">auth.ts</span>.
+                <span className="text-brand-hover font-mono">auth.ts</span>.
               </p>
+            </div>
 
-              <div className="mt-6 border-t border-hairline pt-4">
-                <div className="text-xs font-mono text-zinc-400 mb-3">
-                  Click a citation to illuminate evidence:
-                </div>
-                <div className="space-y-2">
-                  {CITATION_EXAMPLES.map((ex, i) => {
-                    const isSelected = activeIdx === i;
-                    return (
-                      <button
-                        key={ex.id}
-                        onClick={() => setActiveIdx(i)}
-                        className={`w-full text-left rounded-lg border p-3.5 transition-all ${
-                          isSelected
-                            ? "border-brand-blue/70 bg-brand-blue/10 shadow-md"
-                            : "border-hairline bg-surface-2/60 hover:border-hairline-bright"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 font-mono text-xs text-zinc-100 font-semibold">
-                            <FileCode className="h-3.5 w-3.5 text-brand-blue" />
-                            <span>{ex.file}</span>
-                            <span className="text-brand-cyan">:{ex.lines}</span>
-                          </div>
-                          {isSelected && (
-                            <span className="flex items-center gap-1 font-mono text-[10px] text-brand-blue uppercase">
-                              <Check className="h-3 w-3" />
-                              Illuminated
-                            </span>
-                          )}
-                        </div>
-                        <div className="mt-1.5 text-xs text-zinc-400 font-sans">
-                          {ex.explanation}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Clickable Citation Pills */}
+            <div className="space-y-2">
+              <div className="font-mono text-[11px] text-zinc-500 uppercase tracking-wider">
+                Extracted Evidence Citations
               </div>
+              {CITATION_EXAMPLES.map((item, idx) => {
+                const isActive = activeIdx === idx;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveIdx(idx)}
+                    className={`w-full flex items-start gap-3 rounded-lg border p-3 text-left transition-all ${
+                      isActive
+                        ? "border-brand-primary/60 bg-surface-2 glow-indigo"
+                        : "border-hairline bg-surface-1/60 hover:bg-surface-1 hover:border-hairline-bright"
+                    }`}
+                  >
+                    <div
+                      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border ${
+                        isActive
+                          ? "border-brand-hover/60 bg-brand-primary/20 text-brand-hover"
+                          : "border-hairline bg-surface-2 text-zinc-500"
+                      }`}
+                    >
+                      {isActive ? (
+                        <Check className="h-3 w-3" />
+                      ) : (
+                        <FileCode className="h-3 w-3" />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-medium text-white truncate">
+                          {item.file}
+                        </span>
+                        <span className="font-mono text-[11px] text-brand-hover tabular-nums">
+                          Lines {item.lines}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-zinc-400 line-clamp-2">
+                        {item.explanation}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right Side: High-Precision Code Viewer with Line Illumination */}
+          {/* Right Side: Illuminated Monaco-Style Code Viewer */}
           <div className="lg:col-span-7">
-            <div className="rounded-xl border border-hairline-bright bg-surface-0 shadow-2xl overflow-hidden">
-              {/* Code Viewer Header */}
-              <div className="flex items-center justify-between border-b border-hairline bg-surface-1 px-4 py-2.5">
-                <div className="flex items-center gap-2 font-mono text-xs text-zinc-300">
-                  <FileCode className="h-3.5 w-3.5 text-brand-blue" />
-                  <span>{activeExample.file}</span>
-                  <span className="rounded bg-surface-3 px-1.5 py-0.5 text-[10px] text-zinc-400">
-                    TypeScript
+            <div className="rounded-xl border border-hairline bg-surface-1 overflow-hidden shadow-2xl">
+              {/* Header Bar */}
+              <div className="flex items-center justify-between border-b border-hairline bg-surface-2 px-4 py-2.5">
+                <div className="flex items-center gap-2">
+                  <FileCode className="h-4 w-4 text-brand-hover" />
+                  <span className="font-mono text-xs text-zinc-300">
+                    {activeExample.file}
+                  </span>
+                  <span className="rounded bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-brand-hover tabular-nums">
+                    {activeExample.lines} illuminated
                   </span>
                 </div>
-                <div className="font-mono text-[11px] text-brand-cyan">
-                  Lines {activeExample.lines} cited
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-surface-3" />
+                  <span className="h-2 w-2 rounded-full bg-surface-3" />
+                  <span className="h-2 w-2 rounded-full bg-surface-3" />
                 </div>
               </div>
 
-              {/* Code Snippet with Spotlight Dimming */}
-              <div className="p-4 font-mono text-xs overflow-x-auto">
+              {/* Code Gutter & Lines */}
+              <div className="p-4 font-mono text-xs overflow-x-auto bg-surface-0">
                 <table className="w-full border-collapse">
                   <tbody>
                     {activeExample.snippet.map((row) => (
                       <tr
                         key={row.lineNum}
-                        className={`transition-all duration-300 ${
+                        className={`transition-all duration-200 ${
                           row.isCited
-                            ? "bg-brand-blue/15 border-l-2 border-brand-blue"
-                            : "opacity-35 hover:opacity-75"
+                            ? "bg-brand-primary/15 border-l-2 border-brand-hover text-white font-medium"
+                            : "opacity-35 hover:opacity-80 text-zinc-400"
                         }`}
                       >
-                        {/* Line Number */}
-                        <td className="w-10 select-none py-1 pr-4 text-right font-mono text-[11px] text-zinc-600">
+                        <td className="w-8 select-none pr-3 text-right text-[11px] text-zinc-600 tabular-nums">
                           {row.lineNum}
                         </td>
-                        {/* Code Line */}
-                        <td className="py-1 pl-2 text-zinc-200 whitespace-pre">
-                          {row.code}
+                        <td className="py-0.5 pl-2 whitespace-pre">
+                          {row.code || " "}
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </div>
-
-              {/* Inspector Status Footer */}
-              <div className="border-t border-hairline bg-surface-1 px-4 py-2 text-[11px] font-mono text-zinc-500 flex items-center justify-between">
-                <span>Symbol: {activeExample.symbol}</span>
-                <span className="text-brand-blue font-semibold">100% Verified in Repo</span>
               </div>
             </div>
           </div>

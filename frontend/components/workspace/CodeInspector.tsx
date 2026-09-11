@@ -5,11 +5,9 @@ import {
   FileCode,
   Copy,
   Check,
-  ExternalLink,
   Layers,
   FunctionSquare,
   Users,
-  GitBranch,
 } from "lucide-react";
 import { type FileContent } from "@/lib/repositories";
 
@@ -52,7 +50,7 @@ export default function CodeInspector({
         {/* Sticky Header */}
         <div className="flex items-center justify-between border-b border-hairline bg-surface-1 px-4 py-2.5 shrink-0">
           <div className="flex items-center gap-2">
-            <FileCode className="h-4 w-4 text-brand-blue" />
+            <FileCode className="h-4 w-4 text-brand-hover" />
             <span className="font-semibold text-zinc-200">{file.path}</span>
             {file.language && (
               <span className="rounded bg-surface-3 px-1.5 py-0.5 text-[10px] text-zinc-400 uppercase">
@@ -60,9 +58,9 @@ export default function CodeInspector({
               </span>
             )}
             {highlightRange && (
-              <span className="flex items-center gap-1.5 rounded-full bg-brand-blue/20 px-2 py-0.5 text-[10px] text-brand-cyan border border-brand-blue/40">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                Lines {highlightRange.start}–{highlightRange.end} illuminated
+              <span className="flex items-center gap-1.5 rounded-full bg-brand-primary/20 px-2.5 py-0.5 text-[10px] text-brand-hover border border-brand-primary/40">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-hover animate-pulse" />
+                <span className="tabular-nums">Lines {highlightRange.start}–{highlightRange.end} illuminated</span>
                 {onClearHighlight && (
                   <button
                     onClick={onClearHighlight}
@@ -87,7 +85,7 @@ export default function CodeInspector({
               onClick={() => setShowIntelligence((prev) => !prev)}
               className={`flex items-center gap-1 rounded border px-2.5 py-1 text-[11px] transition-colors ${
                 showIntelligence
-                  ? "border-brand-blue/60 bg-brand-blue/15 text-brand-cyan"
+                  ? "border-brand-primary/60 bg-brand-primary/15 text-brand-hover"
                   : "border-hairline bg-surface-2 text-zinc-400 hover:text-white"
               }`}
             >
@@ -115,18 +113,18 @@ export default function CodeInspector({
                     id={`L${lineNum}`}
                     className={`transition-colors duration-150 ${
                       isTargetLine
-                        ? "bg-brand-blue/20 border-l-2 border-brand-blue"
+                        ? "bg-brand-primary/20 border-l-2 border-brand-hover font-medium"
                         : isDimmed
-                        ? "opacity-40 hover:opacity-85"
-                        : "hover:bg-surface-1/50"
+                        ? "opacity-35 hover:opacity-85 text-zinc-400"
+                        : "hover:bg-surface-1/50 text-zinc-300"
                     }`}
                   >
                     {/* Line Number Column */}
-                    <td className="w-12 select-none py-0.5 pr-4 text-right text-[11px] text-zinc-600">
+                    <td className="w-12 select-none py-0.5 pr-4 text-right text-[11px] text-zinc-600 tabular-nums">
                       {lineNum}
                     </td>
                     {/* Code Column */}
-                    <td className="py-0.5 pl-2 text-zinc-200 whitespace-pre">
+                    <td className="py-0.5 pl-2 whitespace-pre font-mono">
                       {line || " "}
                     </td>
                   </tr>
@@ -141,7 +139,7 @@ export default function CodeInspector({
       {showIntelligence && (
         <aside className="w-64 shrink-0 bg-surface-1 p-4 overflow-y-auto hidden md:block">
           <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-4 flex items-center gap-1.5">
-            <Layers className="h-3.5 w-3.5 text-brand-blue" />
+            <Layers className="h-3.5 w-3.5 text-brand-hover" />
             <span>File Intelligence</span>
           </div>
 
@@ -151,11 +149,11 @@ export default function CodeInspector({
               <div className="space-y-1 text-[11px] text-zinc-300">
                 <div className="flex justify-between">
                   <span>Lines of code:</span>
-                  <span className="font-bold text-white">{lines.length}</span>
+                  <span className="font-bold text-white tabular-nums">{lines.length}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Estimated tokens:</span>
-                  <span className="font-bold text-white">
+                  <span className="font-bold text-white tabular-nums">
                     {Math.round(file.content.length / 4)}
                   </span>
                 </div>
@@ -164,7 +162,7 @@ export default function CodeInspector({
 
             <div className="rounded-lg border border-hairline bg-surface-0 p-3">
               <div className="text-[10px] text-zinc-500 uppercase mb-2 flex items-center gap-1">
-                <FunctionSquare className="h-3 w-3 text-brand-cyan" />
+                <FunctionSquare className="h-3 w-3 text-brand-accent" />
                 <span>Detected Symbols</span>
               </div>
               <div className="space-y-1.5 text-[11px]">
@@ -179,12 +177,18 @@ export default function CodeInspector({
 
             <div className="rounded-lg border border-hairline bg-surface-0 p-3">
               <div className="text-[10px] text-zinc-500 uppercase mb-2 flex items-center gap-1">
-                <Users className="h-3 w-3 text-brand-violet" />
+                <Users className="h-3 w-3 text-brand-primary" />
                 <span>Call Graph</span>
               </div>
               <div className="text-[11px] text-zinc-400 space-y-1">
-                <div>Incoming callers: <span className="text-white font-bold">12</span></div>
-                <div>External dependencies: <span className="text-white font-bold">4</span></div>
+                <div className="flex justify-between">
+                  <span>Incoming callers:</span>
+                  <span className="text-white font-bold tabular-nums">12</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>External dependencies:</span>
+                  <span className="text-white font-bold tabular-nums">4</span>
+                </div>
               </div>
             </div>
           </div>

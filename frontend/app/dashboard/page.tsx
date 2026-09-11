@@ -68,16 +68,16 @@ export default function DashboardPage() {
   if (loading || !user) return null;
 
   return (
-    <main className="min-h-screen bg-void text-zinc-100 font-sans selection:bg-brand-blue/30 selection:text-white">
+    <main className="min-h-screen bg-void text-zinc-100 font-sans selection:bg-brand-primary/30 selection:text-white">
       {/* Top Navbar */}
       <header className="border-b border-hairline bg-surface-0 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="flex h-6 w-6 items-center justify-center rounded border border-brand-blue/40 bg-brand-blue/10 text-brand-blue">
+            <div className="flex h-6 w-6 items-center justify-center rounded border border-brand-primary/40 bg-brand-primary/10 text-brand-hover">
               <Terminal className="h-3.5 w-3.5" />
             </div>
             <span className="font-mono text-xs font-semibold uppercase tracking-wider text-white">
-              Codebase <span className="text-brand-blue">Intelligence</span>
+              Codebase <span className="text-brand-hover">Intelligence</span>
             </span>
           </Link>
           <span className="text-zinc-600">/</span>
@@ -115,20 +115,20 @@ export default function DashboardPage() {
 
         {/* Connect Repository Card */}
         <section className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-xl">
-          <div className="flex items-center gap-2 font-mono text-xs text-brand-blue uppercase tracking-wider mb-3">
+          <div className="flex items-center gap-2 font-mono text-xs text-brand-hover uppercase tracking-wider mb-3">
             <Plus className="h-3.5 w-3.5" />
             <span>Connect Repository</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-2.5">
             <input
-              className="flex-1 rounded-lg border border-hairline bg-surface-0 px-4 py-2.5 font-mono text-xs text-white placeholder-zinc-500 focus:border-brand-blue focus:outline-none"
+              className="flex-1 rounded-lg border border-hairline bg-surface-0 px-4 py-2.5 font-mono text-xs text-white placeholder-zinc-500 focus:border-brand-primary focus:outline-none"
               placeholder="https://github.com/owner/repository"
               value={repoUrl}
               onChange={(e) => setRepoUrl(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleConnect()}
             />
             <button
-              className="flex items-center justify-center gap-2 rounded-lg bg-brand-blue px-6 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-600 disabled:opacity-50 transition-all shadow-md"
+              className="flex items-center justify-center gap-2 rounded-lg bg-brand-primary px-6 py-2.5 font-mono text-xs font-semibold text-white hover:bg-brand-hover disabled:opacity-50 transition-all shadow-md"
               onClick={handleConnect}
               disabled={busy || !repoUrl.trim()}
             >
@@ -138,7 +138,7 @@ export default function DashboardPage() {
           </div>
           {indexStatus && (
             <div className="mt-3 flex items-center gap-2 font-mono text-xs text-zinc-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-pulse" />
               <span>Status: {indexStatus}</span>
             </div>
           )}
@@ -167,8 +167,8 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <GitBranch className="h-4 w-4 text-brand-blue" />
-                        <span className="font-mono text-sm font-semibold text-white group-hover:text-brand-cyan transition-colors">
+                        <GitBranch className="h-4 w-4 text-brand-hover" />
+                        <span className="font-mono text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">
                           {repo.owner}/{repo.name}
                         </span>
                       </div>
@@ -186,7 +186,7 @@ export default function DashboardPage() {
                     <span>
                       {repo.default_branch ? `branch: ${repo.default_branch}` : "Repository ready"}
                     </span>
-                    <span className="text-brand-blue flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span className="text-brand-hover flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                       <span>Open Workspace</span>
                       <ArrowRight className="h-3 w-3" />
                     </span>

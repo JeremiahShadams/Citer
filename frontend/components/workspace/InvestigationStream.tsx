@@ -137,7 +137,7 @@ export default function InvestigationStream({
                 onClick={() => {
                   setInput("How does authentication and session validation work?");
                 }}
-                className="rounded border border-hairline bg-surface-0 px-3 py-2 text-xs text-zinc-400 hover:border-brand-blue/50 hover:text-zinc-200 transition-colors"
+                className="rounded border border-hairline bg-surface-0 px-3 py-2 text-xs text-zinc-400 hover:border-brand-primary/50 hover:text-zinc-200 transition-colors"
               >
                 &ldquo;How does authentication work?&rdquo;
               </button>
@@ -145,7 +145,7 @@ export default function InvestigationStream({
                 onClick={() => {
                   setInput("What is the database schema and vector configuration?");
                 }}
-                className="rounded border border-hairline bg-surface-0 px-3 py-2 text-xs text-zinc-400 hover:border-brand-blue/50 hover:text-zinc-200 transition-colors"
+                className="rounded border border-hairline bg-surface-0 px-3 py-2 text-xs text-zinc-400 hover:border-brand-primary/50 hover:text-zinc-200 transition-colors"
               >
                 &ldquo;What is the DB schema and vector config?&rdquo;
               </button>
@@ -164,7 +164,7 @@ export default function InvestigationStream({
               {/* Question Header */}
               <div className="border-b border-hairline bg-surface-2/40 px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <span className="h-2 w-2 rounded-full bg-brand-blue" />
+                  <span className="h-2 w-2 rounded-full bg-brand-primary" />
                   <span className="font-mono text-xs font-semibold text-white">
                     {item.question}
                   </span>
@@ -215,7 +215,7 @@ export default function InvestigationStream({
               {item.citations && item.citations.length > 0 && (
                 <div className="border-t border-hairline bg-surface-2/20 px-4 py-3">
                   <div className="font-mono text-[10px] font-semibold text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <FileCode className="h-3 w-3 text-brand-cyan" />
+                    <FileCode className="h-3 w-3 text-brand-accent" />
                     <span>Evidence Citations (Click to inspect code):</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -225,7 +225,7 @@ export default function InvestigationStream({
                         onClick={() =>
                           onSelectCitation?.(c.file_path, c.start_line, c.end_line)
                         }
-                        className="flex items-center gap-1.5 rounded border border-hairline bg-surface-2 px-2.5 py-1 font-mono text-xs text-brand-blue hover:border-brand-blue hover:bg-brand-blue/10 transition-colors"
+                        className="flex items-center gap-1.5 rounded border border-hairline bg-surface-2 px-2.5 py-1 font-mono text-xs text-brand-hover hover:border-brand-primary hover:bg-brand-primary/10 transition-colors"
                       >
                         <span>{c.file_path}</span>
                         <span className="text-zinc-400">
@@ -242,9 +242,9 @@ export default function InvestigationStream({
 
         {/* Live Active Investigation Stepper */}
         {loading && (
-          <div className="rounded-xl border border-brand-blue/30 bg-surface-0 p-4 shadow-xl">
-            <div className="flex items-center gap-2 font-mono text-xs text-brand-cyan mb-3">
-              <span className="h-2 w-2 rounded-full bg-brand-cyan animate-ping" />
+          <div className="rounded-xl border border-brand-primary/30 bg-surface-0 p-4 shadow-xl">
+            <div className="flex items-center gap-2 font-mono text-xs text-brand-accent mb-3">
+              <span className="h-2 w-2 rounded-full bg-brand-accent animate-ping" />
               <span>Investigating codebase...</span>
             </div>
 
@@ -296,7 +296,7 @@ export default function InvestigationStream({
         <div className="flex gap-2">
           <input
             type="text"
-            className="flex-1 rounded-lg border border-hairline bg-surface-2 px-3.5 py-2 font-mono text-xs text-white placeholder-zinc-500 focus:border-brand-blue focus:outline-none"
+            className="flex-1 rounded-lg border border-hairline bg-surface-2 px-3.5 py-2 font-mono text-xs text-white placeholder-zinc-500 focus:border-brand-primary focus:outline-none"
             placeholder="Ask anything about the codebase... (Press Enter)"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -306,7 +306,7 @@ export default function InvestigationStream({
           <button
             onClick={handleSend}
             disabled={loading || !input.trim()}
-            className="flex items-center gap-1.5 rounded-lg bg-brand-blue px-4 py-2 font-mono text-xs font-semibold text-white hover:bg-blue-600 disabled:opacity-40 transition-all"
+            className="flex items-center gap-1.5 rounded-lg bg-brand-primary px-4 py-2 font-mono text-xs font-semibold text-white hover:bg-brand-hover disabled:opacity-40 transition-all"
           >
             <span>Ask</span>
             <ArrowRight className="h-3.5 w-3.5" />

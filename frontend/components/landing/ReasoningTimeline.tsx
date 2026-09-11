@@ -70,7 +70,7 @@ export default function ReasoningTimeline() {
     <section className="py-24 bg-void border-t border-hairline">
       <div className="mx-auto max-w-5xl px-4">
         <div className="mb-16 text-center">
-          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-brand-accent uppercase tracking-widest mb-3">
             <Network className="h-3.5 w-3.5" />
             Agentic Investigation
           </div>
@@ -96,7 +96,7 @@ export default function ReasoningTimeline() {
                   onClick={() => setActiveStep(idx)}
                   className={`cursor-pointer rounded-lg border p-4 transition-all duration-200 ${
                     isActive
-                      ? "border-brand-blue/70 bg-surface-2 shadow-lg"
+                      ? "border-brand-primary/70 bg-surface-2 shadow-lg"
                       : "border-hairline bg-surface-1/40 hover:border-hairline-bright hover:bg-surface-1"
                   }`}
                 >
@@ -105,7 +105,7 @@ export default function ReasoningTimeline() {
                       <span
                         className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                           isActive
-                            ? "bg-brand-blue text-white"
+                            ? "bg-brand-primary text-white"
                             : "bg-surface-3 text-zinc-500"
                         }`}
                       >
@@ -120,7 +120,7 @@ export default function ReasoningTimeline() {
                       </h4>
                     </div>
                     {isActive && (
-                      <span className="h-1.5 w-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-accent animate-pulse" />
                     )}
                   </div>
                   {isActive && (
@@ -138,10 +138,10 @@ export default function ReasoningTimeline() {
             <div className="rounded-xl border border-hairline-bright bg-surface-1 p-6 shadow-2xl">
               <div className="flex items-center justify-between border-b border-hairline pb-3 mb-4">
                 <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-brand-blue animate-ping" />
+                  <span className="h-2 w-2 rounded-full bg-brand-primary animate-ping" />
                   Live Step Telemetry
                 </div>
-                <span className="font-mono text-xs text-brand-cyan">
+                <span className="font-mono text-xs text-brand-accent">
                   Stage {STAGES[activeStep].step} of 07
                 </span>
               </div>
@@ -160,7 +160,7 @@ export default function ReasoningTimeline() {
                   <div className="text-[11px] text-zinc-500 mb-1 uppercase">
                     Agent Log
                   </div>
-                  <div className="text-brand-cyan whitespace-pre-wrap">
+                  <div className="text-brand-accent whitespace-pre-wrap">
                     &gt; {STAGES[activeStep].telemetry}
                   </div>
                 </div>

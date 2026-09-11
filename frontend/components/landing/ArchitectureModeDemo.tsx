@@ -92,7 +92,7 @@ export default function ArchitectureModeDemo() {
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white uppercase">
             See your software
             <br />
-            <span className="text-brand-blue">like a system.</span>
+            <span className="text-brand-hover">like a system.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-zinc-400">
             Automatically inferred from your repository&apos;s AST symbols, import declarations, and route mappings.
@@ -108,7 +108,7 @@ export default function ArchitectureModeDemo() {
               <div className="w-full flex justify-center">
                 <NodeCard
                   node={ARCH_NODES[0]}
-                  icon={<Globe className="h-4 w-4 text-brand-cyan" />}
+                  icon={<Globe className="h-4 w-4 text-brand-accent" />}
                   selected={selectedNode.id === ARCH_NODES[0].id}
                   onClick={() => setSelectedNode(ARCH_NODES[0])}
                 />
@@ -120,7 +120,7 @@ export default function ArchitectureModeDemo() {
               <div className="w-full flex justify-center">
                 <NodeCard
                   node={ARCH_NODES[1]}
-                  icon={<Server className="h-4 w-4 text-brand-blue" />}
+                  icon={<Server className="h-4 w-4 text-brand-hover" />}
                   selected={selectedNode.id === ARCH_NODES[1].id}
                   onClick={() => setSelectedNode(ARCH_NODES[1])}
                 />
@@ -138,7 +138,7 @@ export default function ArchitectureModeDemo() {
                 />
                 <NodeCard
                   node={ARCH_NODES[3]}
-                  icon={<Layers className="h-4 w-4 text-brand-blue" />}
+                  icon={<Layers className="h-4 w-4 text-brand-hover" />}
                   selected={selectedNode.id === ARCH_NODES[3].id}
                   onClick={() => setSelectedNode(ARCH_NODES[3])}
                 />
@@ -166,7 +166,7 @@ export default function ArchitectureModeDemo() {
 
           {/* Node Intelligence Inspector Panel */}
           <div className="rounded-xl border border-hairline-bright bg-surface-2 p-4 shadow-xl sm:p-6 lg:sticky lg:top-24 lg:col-span-4">
-            <div className="font-mono text-[11px] uppercase tracking-wider text-brand-cyan mb-2">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-brand-accent mb-2">
               Node Intelligence
             </div>
             <h3 className="text-xl font-bold text-white mb-1 font-mono">
@@ -195,7 +195,7 @@ export default function ArchitectureModeDemo() {
               </div>
               <div className="flex justify-between">
                 <span className="text-zinc-500">Architecture Tier:</span>
-                <span className="text-brand-blue uppercase">{selectedNode.category}</span>
+                <span className="text-brand-hover uppercase">{selectedNode.category}</span>
               </div>
             </div>
           </div>
@@ -221,7 +221,7 @@ function NodeCard({
       onClick={onClick}
       className={`flex items-center gap-3 rounded-lg border px-4 py-3 text-left transition-all ${
         selected
-          ? "border-brand-blue bg-brand-blue/15 shadow-lg"
+          ? "border-brand-primary bg-brand-primary/15 shadow-lg"
           : "border-hairline bg-surface-0 hover:border-hairline-bright hover:bg-surface-2"
       }`}
     >

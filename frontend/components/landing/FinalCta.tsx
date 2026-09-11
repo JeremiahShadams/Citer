@@ -10,7 +10,7 @@ export default function FinalCta() {
         <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white uppercase leading-tight mb-6">
           Your codebase is already telling the story.
           <br />
-          <span className="text-brand-blue">We help you read it.</span>
+          <span className="text-brand-hover">We help you read it.</span>
         </h2>
 
         <p className="mx-auto max-w-lg text-sm sm:text-base text-zinc-400 mb-8 font-sans">
@@ -21,7 +21,7 @@ export default function FinalCta() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/dashboard"
-            className="flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-brand-blue/70 bg-brand-blue px-8 text-sm font-medium text-white shadow-lg hover:bg-blue-600 transition-all"
+            className="flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-brand-primary/70 bg-brand-primary px-8 text-sm font-medium text-white shadow-lg hover:bg-brand-hover transition-all"
           >
             <span>Connect GitHub</span>
             <ArrowRight className="h-4 w-4" />
@@ -41,7 +41,7 @@ export default function FinalCta() {
         {/* Minimal Footer */}
         <div className="mt-20 border-t border-hairline pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono">
           <div className="flex items-center gap-2">
-            <Terminal className="h-3.5 w-3.5 text-brand-blue" />
+            <Terminal className="h-3.5 w-3.5 text-brand-hover" />
             <span>Codebase Intelligence &copy; {new Date().getFullYear()}</span>
           </div>
           <div className="flex gap-6 mt-4 sm:mt-0">

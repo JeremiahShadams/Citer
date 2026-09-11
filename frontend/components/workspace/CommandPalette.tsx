@@ -94,14 +94,14 @@ export default function CommandPalette({
                   className="w-full flex items-center justify-between rounded-lg p-2.5 text-left hover:bg-surface-2 transition-colors group"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="rounded p-1.5 bg-surface-3 text-zinc-400 group-hover:text-brand-cyan transition-colors">
+                    <div className="rounded p-1.5 bg-surface-3 text-zinc-400 group-hover:text-brand-accent transition-colors">
                       {item.category === "symbol" && <FunctionSquare className="h-3.5 w-3.5" />}
                       {item.category === "file" && <FileCode className="h-3.5 w-3.5" />}
                       {item.category === "service" && <Layers className="h-3.5 w-3.5" />}
                       {item.category === "endpoint" && <ArrowRight className="h-3.5 w-3.5" />}
                     </div>
                     <div>
-                      <div className="text-xs font-semibold text-white group-hover:text-brand-blue transition-colors">
+                      <div className="text-xs font-semibold text-white group-hover:text-brand-hover transition-colors">
                         {item.name}
                       </div>
                       <div className="text-[11px] text-zinc-500">{item.path}</div>

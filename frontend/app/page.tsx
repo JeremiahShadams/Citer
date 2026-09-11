@@ -11,7 +11,7 @@ import FinalCta from "@/components/landing/FinalCta";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-void text-zinc-100 selection:bg-brand-blue/30 selection:text-white">
+    <main className="min-h-screen bg-void text-zinc-100 selection:bg-brand-primary/30 selection:text-white">
       <LandingNavbar />
       <HeroSection />
       <AskTerminalDemo />

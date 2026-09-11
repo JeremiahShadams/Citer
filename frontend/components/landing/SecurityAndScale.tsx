@@ -36,7 +36,7 @@ export default function SecurityAndScale() {
 
             <div className="rounded-xl border border-hairline bg-surface-1 p-5">
               <div className="font-mono text-xs text-zinc-400 mb-2 uppercase tracking-wider flex items-center gap-2">
-                <Lock className="h-4 w-4 text-brand-blue" />
+                <Lock className="h-4 w-4 text-brand-hover" />
                 Zero Retention LLM
               </div>
               <p className="text-xs text-zinc-300 font-sans leading-relaxed">
@@ -46,7 +46,7 @@ export default function SecurityAndScale() {
 
             <div className="rounded-xl border border-hairline bg-surface-1 p-5">
               <div className="font-mono text-xs text-zinc-400 mb-2 uppercase tracking-wider flex items-center gap-2">
-                <Database className="h-4 w-4 text-brand-cyan" />
+                <Database className="h-4 w-4 text-brand-accent" />
                 Encrypted Credentials
               </div>
               <p className="text-xs text-zinc-300 font-sans leading-relaxed">
@@ -58,7 +58,7 @@ export default function SecurityAndScale() {
 
         {/* Live Codebase Incremental Sync */}
         <div className="rounded-xl border border-hairline bg-surface-1 p-4 sm:p-8">
-          <div className="flex items-center gap-2 font-mono text-xs text-brand-cyan uppercase tracking-widest mb-3">
+          <div className="flex items-center gap-2 font-mono text-xs text-brand-accent uppercase tracking-widest mb-3">
             <RefreshCw className="h-3.5 w-3.5 animate-spin" />
             Incremental Ingestion
           </div>
@@ -84,11 +84,11 @@ export default function SecurityAndScale() {
             </div>
             <div className="rounded border border-hairline bg-surface-0 p-3">
               <div className="text-zinc-500 text-[10px] mb-1">04</div>
-              <div className="text-brand-blue font-semibold">Reparse AST</div>
+              <div className="text-brand-hover font-semibold">Reparse AST</div>
             </div>
             <div className="rounded border border-hairline bg-surface-0 p-3">
               <div className="text-zinc-500 text-[10px] mb-1">05</div>
-              <div className="text-brand-cyan font-semibold">Map Callers</div>
+              <div className="text-brand-accent font-semibold">Map Callers</div>
             </div>
             <div className="rounded border border-hairline bg-surface-0 p-3">
               <div className="text-zinc-500 text-[10px] mb-1">06</div>

@@ -52,7 +52,7 @@ export default function EvalDashboard() {
     : [];
 
   return (
-    <main className="min-h-screen bg-void text-zinc-100 font-sans selection:bg-brand-blue/30 selection:text-white">
+    <main className="min-h-screen bg-void text-zinc-100 font-sans selection:bg-brand-primary/30 selection:text-white">
       {/* Top Header */}
       <header className="border-b border-hairline bg-surface-0 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -65,7 +65,7 @@ export default function EvalDashboard() {
           </Link>
           <span className="text-zinc-600">/</span>
           <div className="flex items-center gap-2 font-mono text-xs font-semibold text-white">
-            <Layers className="h-3.5 w-3.5 text-brand-blue" />
+            <Layers className="h-3.5 w-3.5 text-brand-hover" />
             <span>Evaluation &amp; Ground-Truth Benchmarks</span>
           </div>
         </div>
@@ -115,12 +115,12 @@ export default function EvalDashboard() {
               <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-lg">
                 <div className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider mb-1 flex items-center justify-between">
                   <span>Hallucination</span>
-                  <ShieldCheck className="h-4 w-4 text-brand-cyan" />
+                  <ShieldCheck className="h-4 w-4 text-brand-accent" />
                 </div>
                 <div className="text-3xl font-bold text-white font-mono">
                   {(latestRun.hallucination_rate * 100).toFixed(1)}%
                 </div>
-                <div className="mt-2 text-[11px] font-mono text-brand-cyan">
+                <div className="mt-2 text-[11px] font-mono text-brand-accent">
                   Zero ungrounded assertions
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function EvalDashboard() {
               <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-lg">
                 <div className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider mb-1 flex items-center justify-between">
                   <span>Total Scenarios</span>
-                  <Terminal className="h-4 w-4 text-brand-blue" />
+                  <Terminal className="h-4 w-4 text-brand-hover" />
                 </div>
                 <div className="text-3xl font-bold text-white font-mono">
                   {latestRun.results.length}

@@ -15,7 +15,7 @@ export default function TraditionalVsIntelligence() {
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
             Traditional AI finds text.
             <br />
-            <span className="text-brand-blue">
+            <span className="text-brand-hover">
               Codebase Intelligence understands relationships.
             </span>
           </h2>
@@ -79,13 +79,13 @@ export default function TraditionalVsIntelligence() {
           </div>
 
           {/* Right: Codebase Intelligence */}
-          <div className="rounded-xl border border-brand-blue/40 bg-surface-1 p-6 relative overflow-hidden shadow-2xl">
+          <div className="rounded-xl border border-brand-primary/40 bg-surface-1 p-6 relative overflow-hidden shadow-2xl">
             <div className="flex items-center justify-between border-b border-hairline pb-4 mb-6">
               <div className="font-mono text-xs uppercase tracking-wider text-zinc-200 flex items-center gap-2 font-semibold">
-                <Check className="h-4 w-4 text-brand-blue" />
+                <Check className="h-4 w-4 text-brand-hover" />
                 <span>Codebase Intelligence</span>
               </div>
-              <span className="text-[11px] font-mono text-brand-blue bg-brand-blue/15 px-2 py-0.5 rounded border border-brand-blue/30">
+              <span className="text-[11px] font-mono text-brand-hover bg-brand-primary/15 px-2 py-0.5 rounded border border-brand-primary/30">
                 Multi-Hop Graph Agent
               </span>
             </div>
@@ -95,20 +95,20 @@ export default function TraditionalVsIntelligence() {
               <div className="rounded-lg border border-hairline bg-surface-0 p-3 text-white">
                 Question: &quot;How does auth work?&quot;
               </div>
-              <div className="flex justify-center text-brand-blue">
+              <div className="flex justify-center text-brand-hover">
                 <ArrowDown className="h-4 w-4" />
               </div>
               <div className="rounded-lg border border-hairline bg-surface-0 p-3 text-zinc-200 flex items-center justify-between">
                 <span>Tree-Sitter AST + Hybrid Fusion</span>
-                <span className="text-[10px] text-brand-cyan">RRF</span>
+                <span className="text-[10px] text-brand-accent">RRF</span>
               </div>
-              <div className="flex justify-center text-brand-blue">
+              <div className="flex justify-center text-brand-hover">
                 <ArrowDown className="h-4 w-4" />
               </div>
-              <div className="rounded-lg border border-brand-blue/30 bg-brand-blue/10 p-3 text-brand-blue">
+              <div className="rounded-lg border border-brand-primary/30 bg-brand-primary/10 p-3 text-brand-hover">
                 Trace Symbols, Callers, &amp; Dependencies
               </div>
-              <div className="flex justify-center text-brand-blue">
+              <div className="flex justify-center text-brand-hover">
                 <ArrowDown className="h-4 w-4" />
               </div>
               <div className="rounded-lg border border-hairline bg-surface-0 p-3 text-emerald-300 flex items-center justify-between">

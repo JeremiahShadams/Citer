@@ -119,7 +119,7 @@ export default function RepoWorkspacePage() {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <Terminal className="h-3.5 w-3.5 text-brand-blue" />
+            <Terminal className="h-3.5 w-3.5 text-brand-hover" />
             <span className="hidden sm:inline">Cockpit</span>
           </button>
           <button
@@ -141,7 +141,7 @@ export default function RepoWorkspacePage() {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            <Sparkles className="h-3.5 w-3.5 text-brand-cyan" />
+            <Sparkles className="h-3.5 w-3.5 text-brand-accent" />
             <span className="hidden sm:inline">3D Galaxy</span>
           </button>
         </div>
@@ -174,7 +174,7 @@ export default function RepoWorkspacePage() {
                   placeholder="Filter repository..."
                   value={fileFilter}
                   onChange={(e) => setFileFilter(e.target.value)}
-                  className="w-full rounded border border-hairline bg-surface-1 px-2.5 py-1 font-mono text-xs text-zinc-200 placeholder-zinc-500 focus:border-brand-blue focus:outline-none"
+                  className="w-full rounded border border-hairline bg-surface-1 px-2.5 py-1 font-mono text-xs text-zinc-200 placeholder-zinc-500 focus:border-brand-primary focus:outline-none"
                 />
               </div>
 
@@ -278,7 +278,7 @@ function FileNode({
         onClick={() => onSelect(entry.name)}
         className={`flex items-center gap-1.5 w-full text-left rounded px-2 py-1 text-xs transition-colors ${
           isActive
-            ? "bg-brand-blue/20 text-white font-semibold border-l-2 border-brand-blue"
+            ? "bg-brand-primary/20 text-white font-semibold border-l-2 border-brand-primary"
             : "text-zinc-400 hover:bg-surface-2 hover:text-zinc-200"
         }`}
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
@@ -297,7 +297,7 @@ function FileNode({
         style={{ paddingLeft: `${depth * 12 + 8}px` }}
       >
         <span className="text-zinc-600 text-[10px] w-3">{open ? "▾" : "▸"}</span>
-        <Folder className="h-3.5 w-3.5 shrink-0 text-brand-blue/70" />
+        <Folder className="h-3.5 w-3.5 shrink-0 text-brand-hover/70" />
         <span className="truncate">{entry.name}</span>
       </button>
       {open &&

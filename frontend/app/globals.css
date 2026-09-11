@@ -2,24 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
-    --bg-void: #060608;
-    --text-primary: #ededf2;
-    --text-muted: #8b8b9e;
+    --color-bg-base: #08090a;
+    --color-surface-elevated: #0f1011;
+    --color-border-subdued: rgba(255, 255, 255, 0.05);
+    --color-border-bright: rgba(255, 255, 255, 0.08);
+    --color-brand-primary: #5e6ad2;
+    --color-brand-hover: #7170ff;
+    --color-brand-accent: #828fff;
+    --color-text-primary: #f7f8f8;
+    --color-text-muted: #8a8f98;
+    --bg-void: #08090a;
   }
 
   body {
-    background-color: #060608;
-    color: #ededf2;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #08090a;
+    color: #f7f8f8;
+    font-weight: 510;
+    font-feature-settings: "cv01" 1, "ss03" 1, "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.25);
+    background: rgba(94, 106, 210, 0.32);
     color: #ffffff;
   }
 }
@@ -60,8 +67,8 @@ html, body {
 
 /* Custom minimal dark scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -69,12 +76,12 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #232332;
-  border-radius: 3px;
+  background: #191a1b;
+  border-radius: 2.5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #323246;
+  background: #232332;
 }
 
 /* Technical grid patterns */
@@ -87,16 +94,29 @@ html, body {
 
 .bg-tech-dots {
   background-size: 24px 24px;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
-/* Restrained glow effects */
-.glow-cobalt {
-  box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.2);
+/* Restrained Linear-standard glow effects */
+.glow-indigo {
+  box-shadow: 0 0 24px -4px rgba(94, 106, 210, 0.28);
 }
 
 .glow-violet {
-  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 24px -4px rgba(113, 112, 255, 0.28);
+}
+
+.glow-cobalt {
+  box-shadow: 0 0 24px -4px rgba(94, 106, 210, 0.25);
+}
+
+.glow-accent {
+  box-shadow: 0 0 24px -4px rgba(130, 143, 255, 0.28);
+}
+
+/* Tabular numbers for numerical telemetry */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Terminal blink cursor */
@@ -109,8 +129,9 @@ html, body {
   display: inline-block;
   width: 7px;
   height: 15px;
-  background-color: #3b82f6;
+  background-color: #7170ff;
   margin-left: 2px;
   vertical-align: middle;
   animation: cursorBlink 1s infinite;
 }
+

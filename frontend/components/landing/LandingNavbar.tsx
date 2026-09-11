@@ -1,20 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { Terminal, Shield, GitBranch, ArrowRight } from "lucide-react";
+import { Terminal, ArrowRight } from "lucide-react";
 
 export default function LandingNavbar() {
   return (
     <header className="fixed inset-x-0 top-3 z-50 mx-auto max-w-5xl px-3 sm:top-4 sm:px-4">
-      <nav className="flex min-w-0 items-center justify-between gap-2 rounded-full border border-hairline bg-surface-1/70 px-3 py-2.5 backdrop-blur-xl shadow-2xl sm:px-5">
+      <nav className="flex min-w-0 items-center justify-between gap-2 rounded-full border border-hairline bg-surface-1/80 px-3.5 py-2 backdrop-blur-xl shadow-2xl sm:px-5">
         {/* Logo & Brand */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="flex h-6 w-6 items-center justify-center rounded border border-brand-blue/30 bg-brand-blue/10 text-brand-blue group-hover:border-brand-blue/60 transition-colors">
+          <div className="flex h-6 w-6 items-center justify-center rounded border border-brand-primary/30 bg-brand-primary/10 text-brand-hover group-hover:border-brand-primary/60 transition-colors">
             <Terminal className="h-3.5 w-3.5" />
           </div>
           <div className="flex min-w-0 items-center gap-1.5 truncate font-mono text-[10px] font-semibold tracking-wider text-zinc-100 uppercase sm:text-xs">
             <span>Codebase</span>
-            <span className="text-brand-blue">Intelligence</span>
+            <span className="text-brand-hover">Intelligence</span>
           </div>
         </Link>
 
@@ -47,7 +47,7 @@ export default function LandingNavbar() {
           </Link>
           <Link
             href="/dashboard"
-            className="flex items-center gap-1.5 rounded-full border border-brand-blue/40 bg-brand-blue/15 px-3.5 py-1.5 text-xs font-medium text-blue-200 hover:bg-brand-blue/25 hover:border-brand-blue/60 transition-all shadow-sm"
+            className="flex items-center gap-1.5 rounded-full border border-brand-primary/40 bg-brand-primary/15 px-3.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-brand-primary/25 hover:border-brand-hover/60 hover:text-white transition-all shadow-sm"
           >
             <span>Connect GitHub</span>
             <ArrowRight className="h-3 w-3" />
