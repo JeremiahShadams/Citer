@@ -46,7 +46,13 @@ Citer solves this by **cloning any GitHub repository**, parsing it into **symbol
 
 > **One-line pitch:** Give Citer a company repo and it tells you where every part lives — and where to go when an issue arises.
 
+I built this because I've been the new person staring at a 500-file repo on day one, afraid to ask where auth lives for the third time. Citer is the teammate I wished I had — patient, precise, and honest when it doesn't know.
+
 Built for **any developer**, optimized for **onboarding and maintenance**.
+
+### If you're hiring
+
+I'm Jeremiah Shadams. I design grounded AI systems — retrieval that doesn't hallucinate, agents you can trace, and UIs people actually enjoy. This repo is my proof: real Docker stack, real eval harness, honest limitations documented below. If your team needs someone who ships end-to-end and writes it up clearly, let's talk — my GitHub is [@JeremiahShadams](https://github.com/JeremiahShadams).
 
 ---
 
@@ -319,5 +325,9 @@ make eval   # backend -m scripts.eval → runs dataset against /api/ask
 
 ## License
 
-[MIT](LICENSE) — built as a portfolio project. PRs and issues welcome.
+[MIT](LICENSE) — built as a portfolio project by [Jeremiah Shadams](https://github.com/JeremiahShadams). PRs and issues welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+
+---
+
+*If this helped you understand a codebase faster, that's the whole point. Star it, try it on your own repo, and tell me what broke — I read every issue.*
 

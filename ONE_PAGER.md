@@ -80,6 +80,6 @@ User asks at localhost:3000
 
 *   Code: `backend/app/agent/graph.py`, `ingestion/chunker.py`, `retrieval/hybrid.py`, `db/queries.py`, `migrations/001_init.sql`
 *   Try: `cp .env.example .env && docker compose up -d && make dev-backend dev-frontend` → `http://localhost:3000`
-
 ---
-*Built by a senior engineer — agentic, grounded, evaluated.*
+
+*Built by Jeremiah Shadams — I turn unfamiliar codebases into answered questions. Grounded, agentic, evaluated. If you're hiring someone who ships the whole loop (ingestion → retrieval → agent → UI → eval) and documents it honestly, let's talk: [@JeremiahShadams](https://github.com/JeremiahShadams).*

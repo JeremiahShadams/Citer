@@ -1,0 +1,25 @@
+---
+name: Feature request
+description: Suggest an improvement for Citer.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      placeholder: Onboarding to a new repo still takes too long because ...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      placeholder: Add ... so that ... Acceptance: ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Retrieval, Agent, Ingestion, Frontend, Eval, Infra, Docs]
+---

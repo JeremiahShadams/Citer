@@ -1,0 +1,16 @@
+# Normalize line endings and mark generated files
+* text=auto eol=lf
+
+*.py text diff=python
+*.ts text diff=typescript
+*.tsx text diff=typescript
+*.sql text
+
+# Generated / vendored
+package-lock.json text
+frontend/next-env.d.ts linguist-generated=true
+
+# Binary
+*.png binary
+*.jpg binary
+*.svg text

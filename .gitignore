@@ -6,21 +6,33 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
 
 # Node
 node_modules/
 .next/
 out/
 *.tsbuildinfo
+next-env.d.ts
 
 # Env / secrets
 .env
 .env.local
+.env.*.local
 
 # Data / clones
 data/*
 !data/.gitkeep
 
-# Misc
+# Removed duplicates (archived outside the repo)
+citer.zip
+citer_extracted/
+
+# OS / editor
 .DS_Store
+Thumbs.db
 *.log
+.vscode/*
+!.vscode/extensions.json
+.idea/
