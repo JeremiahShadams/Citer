@@ -1,14 +1,14 @@
 from langchain_core.messages import BaseMessage
-from langchain_openai import ChatOpenAI
+from langchain_groq import ChatGroq
 
 from app.core.config import settings
 
 
-def get_chat_model(temperature: float = 0.0) -> ChatOpenAI:
-    """Return the chat model used by the agent. Requires OPENAI_API_KEY."""
-    if not settings.openai_api_key:
-        raise RuntimeError("OPENAI_API_KEY is not set; add it to .env before running the agent")
-    return ChatOpenAI(model=settings.openai_model, temperature=temperature, api_key=settings.openai_api_key)
+def get_chat_model(temperature: float = 0.0) -> ChatGroq:
+    """Return the chat model used by the agent. Requires GROQ_API_KEY."""
+    if not settings.groq_api_key:
+        raise RuntimeError("GROQ_API_KEY is not set; add it to .env before running the agent")
+    return ChatGroq(model=settings.groq_model, temperature=temperature, api_key=settings.groq_api_key)
 
 
 def format_history(messages: list[dict]) -> str:

@@ -16,15 +16,15 @@ def test_format_history_handles_empty():
 
 
 def test_get_chat_model_requires_key(monkeypatch):
-    monkeypatch.setattr(llm.settings, "openai_api_key", "")
-    with pytest.raises(RuntimeError, match="OPENAI_API_KEY"):
+    monkeypatch.setattr(llm.settings, "groq_api_key", "")
+    with pytest.raises(RuntimeError, match="GROQ_API_KEY"):
         llm.get_chat_model()
 
 
 def test_get_chat_model_returns_model(monkeypatch):
-    monkeypatch.setattr(llm.settings, "openai_api_key", "test-key")
+    monkeypatch.setattr(llm.settings, "groq_api_key", "test-key")
     model = llm.get_chat_model()
-    assert model.model_name == "gpt-4o"
+    assert model.model_name == "llama-3.1-70b-versatile"
 
 
 def test_messages_from_text_builds_system_and_human():

@@ -11,9 +11,8 @@ Thanks for stopping by. Citer is a portfolio-grade project by Jeremiah Shadams, 
 ## Local setup (2 minutes)
 
 ```bash
-cp .env.example .env   # add your OPENAI_API_KEY
+cp .env.example .env   # add your GROQ_API_KEY and OPENAI_API_KEY (for embeddings)
 docker compose up -d --build
-# Frontend http://localhost:3000 · Backend http://localhost:8000 · Health /health
 ```
 
 Host dev (hot reload) instead of containers:

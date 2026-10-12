@@ -194,12 +194,12 @@ Fused via **Reciprocal Rank Fusion** `score = Σ 1/(k + rank + 1)`, `k=60`, `fin
 
 - Docker & Docker Compose
 - Node 20+ and Python 3.12+ (for host dev)
-- `OPENAI_API_KEY` + optional `LANGCHAIN_API_KEY` for tracing
+- `GROQ_API_KEY` + `OPENAI_API_KEY` (for embeddings) + optional `LANGCHAIN_API_KEY` for tracing
 
 ### Run in Docker (recommended)
 
 ```bash
-cp .env.example .env   # fill OPENAI_API_KEY and LANGCHAIN_API_KEY
+cp .env.example .env   # fill GROQ_API_KEY, OPENAI_API_KEY (embeddings), and LANGCHAIN_API_KEY
 docker compose up -d --build
 # Postgres :5432  Redis :6379  Backend :8000  Frontend :3000
 ```
@@ -240,8 +240,9 @@ All settings via `.env` → `backend/app/core/config.py:4` (`pydantic-settings`)
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `OPENAI_API_KEY` | — | Required for chat + embeddings |
-| `OPENAI_MODEL` | `gpt-4o` | Chat model (`llm.py:get_chat_model`) |
+| `GROQ_API_KEY` | — | Required for chat |
+| `GROQ_MODEL` | `llama-3.1-70b-versatile` | Chat model (`llm.py:get_chat_model`) |
+| `OPENAI_API_KEY` | — | Required for embeddings |
 | `OPENAI_EMBEDDING_MODEL` | `text-embedding-3-large` | Embedding model |
 | `DATABASE_URL` | `postgresql+psycopg://codeqa:codeqa@localhost:5432/codeqa` | Host: `localhost`; inside compose: `postgres:5432` |
 | `REDIS_URL` | `redis://localhost:6379/0` | Host: `localhost`; inside compose: `redis:6379` |
