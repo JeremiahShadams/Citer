@@ -250,8 +250,8 @@ See `.env.example` for a template.
 
 ```
 ├── ONE_PAGER.md                     # One-page case study (recruiter-ready)
-├── docker-compose.yml               # postgres + redis + backend
-├── Makefile                         # up / down / dev-backend / test / eval
+├── docker-compose.yml               # postgres + redis + backend + web
+├── Makefile                         # up / down / dev-backend / dev-web / test / eval
 ├── backend/
 │   ├── app/
 │   │   ├── api/routes/              # index.py, ask.py (SSE), sessions.py, evaluation.py, auth.py, repositories.py
@@ -268,6 +268,19 @@ See `.env.example` for a template.
 │   ├── migrations/                  # 001_init.sql (vector + HNSW) · 002_auth.sql
 │   ├── scripts/                     # CLI: index a repo, run eval
 │   └── tests/                       # ingestion, retrieval, agent
+├── web/
+│   ├── src/
+│   │   ├── app/                     # Next.js App Router pages
+│   │   │   ├── page.tsx             # Landing page
+│   │   │   ├── try/page.tsx         # Quick start guide
+│   │   │   └── docs/page.tsx        # Documentation
+│   │   ├── components/
+│   │   │   ├── nav/                 # Navigation bar
+│   │   │   └── landing/             # Landing page sections
+│   │   └── lib/                     # Utilities
+│   ├── package.json
+│   ├── Dockerfile
+│   └── next.config.js
 └── data/                            # Ephemeral clone cache (temp dirs)
 ```
 

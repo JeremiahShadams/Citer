@@ -1,4 +1,4 @@
-.PHONY: help up down logs dev-backend test eval clean setup
+.PHONY: help up down logs dev-backend dev-web test eval clean setup
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-12s %s\n", $$1, $$2}'
@@ -19,6 +19,9 @@ logs: ## Tail backend logs
 dev-backend: ## Run backend with hot reload (host)
 	cd backend && uvicorn app.main:app --reload
 
+dev-web: ## Run web with hot reload (host)
+	cd web && npm run dev
+
 test: ## Run backend tests
 	cd backend && pytest -q
 
@@ -27,4 +30,4 @@ eval: ## Run the 25-question golden eval
 
 clean: ## Remove caches and ephemeral clones
 	docker compose down -v || true
-	rm -rf backend/.pytest_cache backend/__pycache__
+	rm -rf backend/.pytest_cache backend/__pycache__ web/.next
