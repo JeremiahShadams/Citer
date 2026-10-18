@@ -9,7 +9,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](backend/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688.svg)](backend/app)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](frontend/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-1.x-1C3C3C.svg)](backend/app/agent)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgvector-336791.svg)](backend/migrations)
 [![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF.svg)](.github/workflows/ci.yml)
@@ -74,12 +73,10 @@ I'm Jeremiah Shadams. I design grounded AI systems — retrieval that doesn't ha
 **Local-first today.** No hosted demo yet — run in Docker in under 2 minutes.
 
 ```
-http://localhost:3000  →  Index a repo  →  Ask "Where is auth handled?"  →  Stream cited answer
+http://localhost:8000  →  Index a repo  →  Ask "Where is auth handled?"  →  Stream cited answer
 ```
 
-> Placeholder for GIF/screenshot: `frontend/app/chat` streaming tokens + citation chips.
-
-See [ONE_PAGER.md](ONE_PAGER.md) for a one-page case study.
+> Frontend is being rebuilt. See [ONE_PAGER.md](ONE_PAGER.md) for a one-page case study.
 
 ---
 
@@ -175,14 +172,13 @@ Fused via **Reciprocal Rank Fusion** `score = Σ 1/(k + rank + 1)`, `k=60`, `fin
 
 | Layer | Technology | Detail |
 |-------|-----------|--------|
-| Frontend | Next.js 14, React 18, TypeScript 5, Tailwind, `react-markdown`, SSE | `frontend/app/chat`, `components/`, `lib/` |
 | Backend | Python 3.12, FastAPI, SQLAlchemy, `psycopg[binary]`, `pgvector` | `backend/app/api/routes/*` |
 | Agent | LangGraph 1.x + `langchain-openai` | `graph.py` 6 nodes, `state.py`, `llm.py: get_chat_model(temperature=0.0)` |
 | LLM | OpenAI **GPT-4o** | Streaming via `model.stream()`, LangSmith tracing |
 | Embeddings | OpenAI **text-embedding-3-large** `dims=1536` (truncated 3072) | Batch 128, `MAX_RETRIES=3`, `MAX_CHARS_PER_TEXT=24000` |
 | Database | PostgreSQL + pgvector `vector(1536)` HNSW `vector_cosine_ops` | `migrations/001_init.sql`, `models.py: CodeChunk/File/Repo/Session/Message` |
 | Cache | Redis 7 (semantic cache `0.95` cosine, `3600s` TTL) | `app/cache/semantic_cache.py` — ready, not yet in hot path |
-| Deploy | Docker Compose: `pgvector:pg16` + `redis:7-alpine` + `backend` + `frontend` | `docker-compose.yml`, `backend/Dockerfile` (python:3.12-slim), `frontend/Dockerfile` (node:20-alpine) |
+| Deploy | Docker Compose: `pgvector:pg16` + `redis:7-alpine` + `backend` | `docker-compose.yml`, `backend/Dockerfile` (python:3.12-slim) |
 
 **Key settings** (`backend/app/core/config.py:33`): `top_k_retrieval=20`, `final_k=8`, `max_agent_iterations=3`, `openai_model=gpt-4o`.
 
@@ -201,7 +197,7 @@ Fused via **Reciprocal Rank Fusion** `score = Σ 1/(k + rank + 1)`, `k=60`, `fin
 ```bash
 cp .env.example .env   # fill GROQ_API_KEY, OPENAI_API_KEY (embeddings), and LANGCHAIN_API_KEY
 docker compose up -d --build
-# Postgres :5432  Redis :6379  Backend :8000  Frontend :3000
+# Postgres :5432  Redis :6379  Backend :8000
 ```
 
 ### Run for Development (hot reload)
@@ -210,7 +206,6 @@ docker compose up -d --build
 make up              # build + start all containers
 # — or —
 make dev-backend     # cd backend && uvicorn app.main:app --reload  (host)
-make dev-frontend    # cd frontend && npm run dev                  (host)
 ```
 
 ### Index & Ask
@@ -225,9 +220,6 @@ curl -X POST http://localhost:8000/api/index \
 curl -N -X POST http://localhost:8000/api/ask \
   -H "Content-Type: application/json" \
   -d '{"question":"Where is authentication handled?","repo_url":"https://github.com/user/repo"}'
-
-# Or open the UI
-open http://localhost:3000
 ```
 
 Health check: `GET http://localhost:8000/health` → `{"status":"ok"}`
@@ -258,8 +250,8 @@ See `.env.example` for a template.
 
 ```
 ├── ONE_PAGER.md                     # One-page case study (recruiter-ready)
-├── docker-compose.yml               # postgres + redis + backend + frontend
-├── Makefile                         # up / down / dev-backend / dev-frontend / test / eval
+├── docker-compose.yml               # postgres + redis + backend
+├── Makefile                         # up / down / dev-backend / test / eval
 ├── backend/
 │   ├── app/
 │   │   ├── api/routes/              # index.py, ask.py (SSE), sessions.py, evaluation.py, auth.py, repositories.py
@@ -276,12 +268,6 @@ See `.env.example` for a template.
 │   ├── migrations/                  # 001_init.sql (vector + HNSW) · 002_auth.sql
 │   ├── scripts/                     # CLI: index a repo, run eval
 │   └── tests/                       # ingestion, retrieval, agent
-├── frontend/
-│   ├── app/
-│   │   ├── chat/                    # Streaming chat + citation chips
-│   │   └── eval/                    # Evaluation dashboard
-│   ├── components/                  # markdown, SSE reader
-│   └── lib/                         # API client
 └── data/                            # Ephemeral clone cache (temp dirs)
 ```
 

@@ -19,18 +19,15 @@ Host dev (hot reload) instead of containers:
 
 ```bash
 make dev-backend    # backend with uvicorn --reload
-make dev-frontend   # frontend with next dev
 ```
 
 ## Checks before you push
 
 ```bash
 make test   # backend pytest
-cd frontend && npm run build && npm test -- --run 2>/dev/null || npx vitest run
 ```
 
 - Backend: Python 3.12, FastAPI, `pytest -q` must pass.
-- Frontend: Next.js 14, `npm run build` must pass, add a Vitest case for new UI behavior.
 - Never commit `.env`, API keys, or cloned repos. `.env.example` is the contract.
 
 ## Reporting issues

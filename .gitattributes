@@ -8,7 +8,6 @@
 
 # Generated / vendored
 package-lock.json text
-frontend/next-env.d.ts linguist-generated=true
 
 # Binary
 *.png binary

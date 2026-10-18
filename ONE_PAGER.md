@@ -54,7 +54,7 @@ User asks at localhost:3000
 | Backend | Python 3.12, FastAPI, SQLAlchemy, psycopg, LangGraph 1.x + LangChain-OpenAI |
 | LLM | **OpenAI GPT-4o** (`temperature=0.0`, streaming) — chosen for citation instruction fidelity |
 | Retrieval | pgvector HNSW + Postgres FTS + symbol exact match + RRF |
-| Infra | Docker Compose (postgres pgvector:pg16 / redis:7-alpine / backend / frontend), LangSmith tracing |
+| Infra | Docker Compose (postgres pgvector:pg16 / redis:7-alpine / backend), LangSmith tracing |
 
 ### What I Learned / Tradeoffs
 
@@ -79,7 +79,7 @@ User asks at localhost:3000
 ### Links
 
 *   Code: `backend/app/agent/graph.py`, `ingestion/chunker.py`, `retrieval/hybrid.py`, `db/queries.py`, `migrations/001_init.sql`
-*   Try: `cp .env.example .env && docker compose up -d && make dev-backend dev-frontend` → `http://localhost:3000`
+*   Try: `cp .env.example .env && docker compose up -d && make dev-backend` → `http://localhost:8000`
 ---
 
 *Built by Jeremiah Shadams — I turn unfamiliar codebases into answered questions. Grounded, agentic, evaluated. If you're hiring someone who ships the whole loop (ingestion → retrieval → agent → UI → eval) and documents it honestly, let's talk: [@JeremiahShadams](https://github.com/JeremiahShadams).*
