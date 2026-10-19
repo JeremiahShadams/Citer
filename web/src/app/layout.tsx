@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -15,8 +15,22 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Citer — Ask any codebase a question. Get a cited answer.',
-  description: 'Give Citer a GitHub repo and it tells you where every part lives — and where to go when an issue arises. Grounded, agentic, evaluated.',
+  title: 'Citer — Answers grounded in your codebase',
+  description:
+    'Ask questions about your repository and get answers grounded in the code, with file and line references you can open and verify.',
+  icons: {
+    icon: [
+      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+  },
+}
+
+export const viewport: Viewport = {
+  colorScheme: 'dark',
+  themeColor: '#11120F',
 }
 
 export default function RootLayout({
@@ -26,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="antialiased bg-background text-foreground">
         {children}
       </body>
     </html>
