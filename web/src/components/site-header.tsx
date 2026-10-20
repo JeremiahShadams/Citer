@@ -1,10 +1,21 @@
 'use client'
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { ChevronDown, Github, Menu, X } from 'lucide-react'
+import {
+  ChevronDown,
+  Github,
+  Menu,
+  X,
+  MessageSquareCode,
+  FileSearch,
+  BookOpen,
+  Sparkles,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { productMenu, siteLinks } from '@/lib/site'
 import { Wordmark } from '@/components/wordmark'
+
+const menuIcons = [MessageSquareCode, FileSearch, BookOpen, Sparkles]
 
 export function SiteHeader() {
   const [productOpen, setProductOpen] = useState(false)
@@ -88,8 +99,7 @@ export function SiteHeader() {
   /* ------------------------------------------------------------------ */
   /*  Hover-intent system (desktop dropdown)                             */
   /*  80ms open delay prevents accidental triggers while crossing the    */
-  /*  nav bar. 150ms close delay lets the pointer travel from the        */
-  /*  trigger into the panel without flicker.                            */
+  /*  nav bar. 150ms close delay lets the pointer travel into panel.     */
   /* ------------------------------------------------------------------ */
   const openDropdown = useCallback(() => {
     if (closeTimer.current) {
@@ -122,7 +132,7 @@ export function SiteHeader() {
   /*  Render                                                             */
   /* ------------------------------------------------------------------ */
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-porcelain/[0.08] bg-obsidian/95 backdrop-blur-[12px]">
+    <header className="sticky top-0 z-50 w-full border-b border-porcelain/[0.08] bg-obsidian/90 backdrop-blur-[15px]">
       <div className="mx-auto flex h-16 max-w-7xl items-center px-4 md:px-6 lg:h-[76px] lg:px-12">
         {/* ---- Wordmark ---- */}
         <a href="/" className="shrink-0" aria-label="Citer home">
@@ -151,7 +161,7 @@ export function SiteHeader() {
                   aria-controls={menuId}
                   onClick={() => setProductOpen((v) => !v)}
                   className={cn(
-                    'flex items-center gap-1 text-[14.5px] font-[480] tracking-[-0.1px] transition-colors duration-[120ms]',
+                    'flex items-center gap-1.5 text-[14.5px] font-[480] tracking-[-0.1px] transition-colors duration-[120ms]',
                     productOpen
                       ? 'text-porcelain'
                       : 'text-steel hover:text-porcelain'
@@ -180,33 +190,47 @@ export function SiteHeader() {
                   onMouseEnter={cancelClose}
                   onMouseLeave={scheduleClose}
                   className={cn(
-                    'absolute left-[-12px] top-[calc(100%+12px)] w-[280px] rounded-lg border border-porcelain/[0.08] bg-surface-raised p-2',
-                    'shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)]',
-                    'transition-[opacity,transform,visibility] duration-[150ms] ease-out-expo',
+                    'absolute left-[-12px] top-[calc(100%+12px)] w-[290px] rounded-xl border border-porcelain/[0.08] bg-surface-raised p-2.5',
+                    'shadow-[0_16px_36px_-10px_rgba(0,0,0,0.8)]',
+                    'transition-[opacity,transform,visibility] duration-[140ms] ease-out-expo',
                     'motion-reduce:transition-none',
                     productOpen
                       ? 'visible translate-y-0 opacity-100'
                       : 'invisible -translate-y-[5px] opacity-0 pointer-events-none'
                   )}
                 >
-                  <ul>
-                    {productMenu.map((item) => (
-                      <li key={item.title}>
-                        <a
-                          href={item.href}
-                          role="menuitem"
-                          onClick={() => setProductOpen(false)}
-                          className="flex min-h-[44px] flex-col justify-center rounded-md px-3 py-2.5 transition-colors duration-[120ms] hover:bg-porcelain/[0.05]"
-                        >
-                          <span className="text-[14px] font-[500] text-porcelain">
-                            {item.title}
-                          </span>
-                          <span className="text-[13px] text-steel">
-                            {item.description}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
+                  <div className="px-2 pb-1.5 pt-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-steel/60">
+                    Product
+                  </div>
+                  <ul className="flex flex-col gap-0.5">
+                    {productMenu.map((item, idx) => {
+                      const Icon = menuIcons[idx] || Sparkles
+                      return (
+                        <li key={item.title}>
+                          {idx === 2 && (
+                            <div className="my-1.5 h-px bg-porcelain/[0.08]" />
+                          )}
+                          <a
+                            href={item.href}
+                            role="menuitem"
+                            onClick={() => setProductOpen(false)}
+                            className="group flex min-h-[44px] items-center gap-3 rounded-lg px-2.5 py-2 transition-colors duration-[120ms] hover:bg-porcelain/[0.05]"
+                          >
+                            <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-porcelain/[0.06] bg-porcelain/[0.03] text-steel transition-colors group-hover:border-porcelain/[0.12] group-hover:text-porcelain">
+                              <Icon className="size-3.5" aria-hidden="true" />
+                            </span>
+                            <span className="flex flex-col">
+                              <span className="text-[13.5px] font-[500] text-porcelain">
+                                {item.title}
+                              </span>
+                              <span className="text-[11.5px] text-steel leading-tight">
+                                {item.description}
+                              </span>
+                            </span>
+                          </a>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </div>
               </div>
@@ -237,7 +261,7 @@ export function SiteHeader() {
         </nav>
 
         {/* ---- Right side actions ---- */}
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-4">
           {/* GitHub */}
           <a
             href={siteLinks.github}
@@ -320,20 +344,24 @@ export function SiteHeader() {
             Product
           </p>
           <ul>
-            {productMenu.map((item) => (
-              <li key={item.title}>
-                <a
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex min-h-[44px] items-center gap-4 rounded-md px-2 text-[15px] text-porcelain transition-colors hover:bg-porcelain/[0.05]"
-                >
-                  <span>{item.title}</span>
-                  <span className="ml-auto truncate text-[13px] text-steel">
-                    {item.description}
-                  </span>
-                </a>
-              </li>
-            ))}
+            {productMenu.map((item, idx) => {
+              const Icon = menuIcons[idx] || Sparkles
+              return (
+                <li key={item.title}>
+                  <a
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex min-h-[44px] items-center gap-3 rounded-md px-2 text-[15px] text-porcelain transition-colors hover:bg-porcelain/[0.05]"
+                  >
+                    <Icon className="size-4 text-steel" aria-hidden="true" />
+                    <span>{item.title}</span>
+                    <span className="ml-auto truncate text-[13px] text-steel">
+                      {item.description}
+                    </span>
+                  </a>
+                </li>
+              )
+            })}
           </ul>
 
           <div className="my-3 h-px bg-porcelain/[0.08]" />

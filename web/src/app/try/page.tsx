@@ -1,6 +1,6 @@
 'use client'
 
-import { Navbar } from '@/components/nav/Navbar'
+import { SiteHeader } from '@/components/site-header'
 import { Terminal, Github, CheckCircle, Copy, Check } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'

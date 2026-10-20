@@ -1,11 +1,11 @@
-import { Navbar } from '@/components/nav/Navbar'
+import { SiteHeader } from '@/components/site-header'
 import Link from 'next/link'
 import { Terminal, FileText, Github, ArrowRight } from 'lucide-react'
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="min-h-screen bg-obsidian text-porcelain">
+      <SiteHeader />
       <main className="pt-16 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
