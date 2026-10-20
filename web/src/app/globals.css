@@ -3,45 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 17 18 15;
-    --foreground: 241 240 232;
-    --muted: 25 26 22;
-    --muted-foreground: 164 166 154;
-    --border: 52 54 47;
-    --accent: 166 181 138;
-    --accent-foreground: 17 18 15;
-    --ring: 166 181 138;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 17 18 15;
-    --foreground: 241 240 232;
-    --muted: 25 26 22;
-    --muted-foreground: 164 166 154;
-    --border: 52 54 47;
-    --accent: 166 181 138;
-    --accent-foreground: 17 18 15;
-    --ring: 166 181 138;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
   html {
     scroll-behavior: smooth;
   }
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  body {
+    @apply bg-obsidian text-porcelain font-sans antialiased;
+  }
+
+  ::selection {
+    background: rgba(20, 232, 198, 0.16);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-mint/40 ring-offset-2 ring-offset-obsidian;
   }
 }
 
@@ -52,7 +27,18 @@
   .text-pretty {
     text-wrap: pretty;
   }
-  .ease-out-expo {
-    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

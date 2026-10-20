@@ -3,22 +3,28 @@ export const siteLinks = {
   preview: '/try',
   docs: '/docs',
   source: 'https://github.com/JeremiahShadams/Citer',
+  github: 'https://github.com/JeremiahShadams/Citer',
 }
 
 export const productMenu = [
   {
-    title: 'Ask',
-    description: 'Questions about a repository, in plain language',
+    title: 'Ask your codebase',
+    description: 'Find answers across files and symbols',
     href: '/try',
   },
   {
-    title: 'Cite',
-    description: 'Every answer linked to file and line',
+    title: 'Follow the evidence',
+    description: 'Open the source behind an answer',
     href: '/try',
   },
   {
-    title: 'Verify',
-    description: 'Open the referenced source in context',
-    href: '/try',
+    title: 'Documentation',
+    description: 'Setup, guides and API reference',
+    href: '/docs',
+  },
+  {
+    title: 'Changelog',
+    description: "What's new in Citer",
+    href: '/docs',
   },
 ]
