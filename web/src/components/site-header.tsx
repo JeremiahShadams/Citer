@@ -278,7 +278,7 @@ export function SiteHeader() {
             href={siteLinks.preview}
             className="hidden h-9 items-center gap-1.5 rounded-md bg-mint px-4 text-[14px] font-medium tracking-[-0.1px] text-obsidian transition-all duration-[120ms] hover:brightness-110 sm:inline-flex"
           >
-            Get started
+            Try Citer
             <svg
               aria-hidden="true"
               className="size-3.5"
@@ -409,7 +409,7 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(false)}
               className="flex h-11 w-full items-center justify-center gap-1.5 rounded-md bg-mint text-[15px] font-medium text-obsidian transition-colors hover:brightness-110"
             >
-              Get started
+              Try Citer
               <svg
                 aria-hidden="true"
                 className="size-3.5"
