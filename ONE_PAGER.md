@@ -26,7 +26,7 @@ User asks at localhost:3000
       retrieve: hybrid_search() → vector + FTS + symbol → RRF(k=60) → top 20
       decide:   LLM JSON {synthesize | file_reader | symbol_searcher} (max 3 loops)
       file_reader / symbol_searcher: pull full file or all chunks for a symbol
-      synthesize: streams GPT-4o tokens + enforces [n] citations, parses against retrieved chunks
+      synthesize: streams Groq llama-3.1-70b tokens + enforces [n] citations, parses against retrieved chunks
   → event: token | citations | done → chat UI + save to sessions/messages
 ```
 
@@ -52,7 +52,7 @@ User asks at localhost:3000
 |-------|------|
 | Frontend | Next.js 14, React 18, TypeScript 5, Tailwind, react-markdown, SSE streaming |
 | Backend | Python 3.12, FastAPI, SQLAlchemy, psycopg, LangGraph 1.x + LangChain-OpenAI |
-| LLM | **OpenAI GPT-4o** (`temperature=0.0`, streaming) — chosen for citation instruction fidelity |
+| LLM | **Groq llama-3.1-70b-versatile** (`temperature=0.0`, streaming) — fast + cheap chat inference |
 | Retrieval | pgvector HNSW + Postgres FTS + symbol exact match + RRF |
 | Infra | Docker Compose (postgres pgvector:pg16 / redis:7-alpine / backend), LangSmith tracing |
 
@@ -65,7 +65,7 @@ User asks at localhost:3000
 ### Real Outcomes
 
 *   **Status:** Usable locally today (`docker compose up`, `POST /api/index` → `/api/ask` streaming). No hosted demo yet.
-*   **Latency:** ~3–7s end-to-end (vector ~100ms + planner/decide 1s + GPT-4o streaming 2–5s). *Not yet benchmarked — TODO: log p50/p95.*
+*   **Latency:** ~3–7s end-to-end (vector ~100ms + planner/decide 1s + Groq streaming 2–5s). *Not yet benchmarked — TODO: log p50/p95.*
 *   **Scale tested:** Citer itself (~50 files / ~10k LOC). Not stress-tested on >1k-file repos.
 *   **What breaks:** Vague “explain everything”, repos with non-code exts (`.md` excluded), typo’d symbols, private repos without `GITHUB_TOKEN`, semantic cache `scan_iter` at scale.
 *   **Accuracy:** 25-question golden dataset (`eval/dataset.py`) with `evaluate_answer()` (passed if `expected_files` in `cited_files`). `eval_runs` table ready; **pass rate not yet recorded — run `make eval` and publish.**
