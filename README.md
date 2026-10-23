@@ -96,7 +96,7 @@ graph TD
   Decide -->|symbol_searcher| SS[symbol_searcher: find_chunks_by_symbol]
   FR --> Decide
   SS --> Decide
-  Decide -->|synthesize| Synth[synthesize: GPT-4o streaming]
+  Decide -->|synthesize| Synth[synthesize: Groq Llama streaming]
   Synth -->|token / citations / done| API
   Synth --> MEM
 ```
@@ -136,7 +136,7 @@ START → planner → retrieve → decide ↺ → synthesize → END
 - **retrieve** (`agent/nodes/retriever.py:8`) — `hybrid_search(repo_id, query, top_k=20)` (`app/retrieval/hybrid.py:11`)
 - **decide** (`agent/nodes/router.py:52`) — LLM returns `{"action":"synthesize" | "file_reader" | "symbol_searcher", ...}` (JSON, capped `max_agent_iterations=3`)
 - **file_reader / symbol_searcher** (`agent/tools/file_reader.py:19`, `agent/tools/symbol_searcher.py`) — expand context with full file or all chunks for a symbol, then loop back to `decide`
-- **synthesize** (`agent/nodes/synthesizer.py:19`) — streams `GPT-4o` tokens via `token_queue` to SSE, injects numbered context (`format_context()` → `[1] path:lines (type sym)`) and history, enforces citations, falls back to `NO_CONTEXT` if retrieval empty
+- **synthesize** (`agent/nodes/synthesizer.py:19`) — streams Groq `llama-3.1-70b-versatile` tokens via `token_queue` to SSE, injects numbered context (`format_context()` → `[1] path:lines (type sym)`) and history, enforces citations, falls back to `NO_CONTEXT` if retrieval empty
 
 Tokens stream as `event: token`, citations as `event: citations`, completion as `event: done` (`app/api/routes/ask.py:92`), persisted via `save_message` to `sessions/messages`.
 
@@ -174,7 +174,7 @@ Fused via **Reciprocal Rank Fusion** `score = Σ 1/(k + rank + 1)`, `k=60`, `fin
 |-------|-----------|--------|
 | Backend | Python 3.12, FastAPI, SQLAlchemy, `psycopg[binary]`, `pgvector` | `backend/app/api/routes/*` |
 | Agent | LangGraph 1.x + `langchain-openai` | `graph.py` 6 nodes, `state.py`, `llm.py: get_chat_model(temperature=0.0)` |
-| LLM | OpenAI **GPT-4o** | Streaming via `model.stream()`, LangSmith tracing |
+| LLM | Groq **llama-3.1-70b-versatile** (`temperature=0.0`) | Streaming via `model.stream()`, LangSmith tracing |
 | Embeddings | OpenAI **text-embedding-3-large** `dims=1536` (truncated 3072) | Batch 128, `MAX_RETRIES=3`, `MAX_CHARS_PER_TEXT=24000` |
 | Database | PostgreSQL + pgvector `vector(1536)` HNSW `vector_cosine_ops` | `migrations/001_init.sql`, `models.py: CodeChunk/File/Repo/Session/Message` |
 | Cache | Redis 7 (semantic cache `0.95` cosine, `3600s` TTL) | `app/cache/semantic_cache.py` — ready, not yet in hot path |
