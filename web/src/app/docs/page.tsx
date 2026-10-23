@@ -58,7 +58,7 @@ curl -N -X POST http://localhost:8000/api/ask \
                   <li><strong>Retrieve</strong> — Hybrid search: vector (pgvector HNSW) + Postgres FTS + exact symbol match → RRF(k=60) → top 20</li>
                   <li><strong>Decide</strong> — LLM returns JSON action: synthesize | file_reader | symbol_searcher (max 3 iterations)</li>
                   <li><strong>File Reader / Symbol Searcher</strong> — Expand context with full file or all chunks for a symbol</li>
-                  <li><strong>Synthesize</strong> — Streams GPT-4o tokens via SSE, enforces [n] citations, parses against retrieved chunks</li>
+                  <li><strong>Synthesize</strong> — Streams Groq llama-3.1-70b tokens via SSE, enforces [n] citations, parses against retrieved chunks</li>
                   <li><strong>Persist</strong> — Sessions/messages saved to Postgres</li>
                 </ol>
 
