@@ -27,7 +27,7 @@ const features = [
   {
     icon: GitBranch,
     title: 'Agentic Loop (6-Node LangGraph)',
-    description: 'Planner → Retrieve → Decide ↺ (file_reader / symbol_searcher) → Synthesize. Max 3 iterations, streaming GPT-4o tokens with enforced citations.',
+    description: 'Planner → Retrieve → Decide ↺ (file_reader / symbol_searcher) → Synthesize. Max 3 iterations, streaming Groq llama-3.1-70b tokens with enforced citations.',
   },
   {
     icon: Zap,
