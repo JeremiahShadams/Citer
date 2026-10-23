@@ -26,7 +26,7 @@ const stack = [
   {
     category: 'AI / ML',
     items: [
-      { name: 'OpenAI GPT-4o', description: 'Streaming, temperature=0' },
+      { name: 'Groq llama-3.1-70b-versatile', description: 'Chat LLM, streaming, temperature=0' },
       { name: 'text-embedding-3-large', description: '1536-dim (truncated 3072)' },
       { name: 'LangChain OpenAI', description: 'Structured output, callbacks' },
       { name: 'Tree-sitter', description: '12+ language AST parsing' },
