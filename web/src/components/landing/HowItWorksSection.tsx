@@ -56,7 +56,7 @@ const steps = [
       'Planner: focused search query',
       'Retrieve: hybrid top-20',
       'Decide: JSON action routing',
-      'Synthesize: streaming GPT-4o',
+      'Synthesize: streaming Groq llama-3.1-70b',
     ],
   },
   {
