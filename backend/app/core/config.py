@@ -7,9 +7,8 @@ class Settings(BaseSettings):
     groq_api_key: str = ""
     groq_model: str = "llama-3.1-70b-versatile"
 
-    openai_api_key: str = ""
-    openai_embedding_model: str = "text-embedding-3-large"
-    embedding_dim: int = 1536
+    embedding_model: str = "BAAI/bge-small-en-v1.5"
+    embedding_dim: int = 384
 
     anthropic_api_key: str = ""
     anthropic_model: str = "claude-3-5-sonnet-20241022"
