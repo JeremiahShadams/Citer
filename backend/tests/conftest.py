@@ -22,7 +22,7 @@ def db_session():
     session.close()
 
 
-def fake_embed(text: str, dim: int = 1536) -> list[float]:
+def fake_embed(text: str, dim: int = 384) -> list[float]:
     """Deterministic pseudo-embedding so tests can insert vectors without an API key."""
     vec = [0.0] * dim
     grams = {t.lower()[i : i + 3] for t in text.split() for i in range(max(len(t) - 2, 0))}
