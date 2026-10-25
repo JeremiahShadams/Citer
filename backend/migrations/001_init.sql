@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS code_chunks (
     end_line     INT,
     language     TEXT,
     content      TEXT NOT NULL,
-    embedding    vector(1536),
+    embedding    vector(384),
     metadata     JSONB,
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );
