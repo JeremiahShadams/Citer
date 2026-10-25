@@ -8,7 +8,7 @@ pgvector==0.3.*
 fastembed==0.9.*
 redis==5.*
 openai==1.*
-langgraph>=1.0
+langgraph>=1.2.15
 langchain-core>=1.0
 langchain-openai>=1.0
 langchain-groq>=1.0
