@@ -5,6 +5,7 @@ pydantic-settings==2.*
 sqlalchemy==2.*
 psycopg[binary]==3.*
 pgvector==0.3.*
+fastembed==0.9.*
 redis==5.*
 openai==1.*
 langgraph>=1.0
