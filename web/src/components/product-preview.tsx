@@ -87,24 +87,31 @@ export function ProductPreview() {
 
   return (
     <div className="relative w-full">
-      {/* Subtle stage glow */}
+      {/* Balanced Backlighting behind the secondary screen */}
       <div
-        className="pointer-events-none absolute -inset-x-6 -inset-y-10 select-none"
+        className="pointer-events-none absolute -inset-x-8 -inset-y-12 select-none"
         aria-hidden="true"
       >
-        <div className="mx-auto h-full w-[94%] rounded-3xl bg-[radial-gradient(ellipse_at_top,rgba(20,232,198,0.07),transparent_65%)]" />
+        {/* Core glow lifting the screen off the canvas */}
+        <div className="absolute inset-x-8 top-2 h-[85%] rounded-3xl bg-[radial-gradient(ellipse_75%_55%_at_50%_25%,rgba(20,232,198,0.22),rgba(20,232,198,0.06)_50%,transparent_75%)] blur-[36px]" />
+
+        {/* Wider ambient fill light */}
+        <div className="absolute -inset-x-12 -inset-y-6 rounded-[40px] bg-[radial-gradient(ellipse_85%_65%_at_50%_35%,rgba(20,232,198,0.12),rgba(15,18,21,0.3)_60%,transparent_85%)] blur-[64px]" />
+
+        {/* Soft top rim light flare */}
+        <div className="absolute inset-x-24 -top-6 h-[80px] bg-gradient-to-b from-mint/20 via-mint/5 to-transparent blur-[24px]" />
       </div>
 
-      {/* Main Product Window */}
+      {/* Main Product Window (Elevated with Rim Lighting) */}
       <figure
         aria-label="Citer product interface: asking question, grounded answer, and cited source code"
         className={cn(
-          'relative z-10 w-full overflow-hidden rounded-2xl border border-porcelain/[0.09] bg-[#0C0E10]',
-          'shadow-[0_1px_0_0_rgba(245,247,250,0.06)_inset,0_32px_80px_-24px_rgba(0,0,0,0.95)]'
+          'relative z-10 w-full overflow-hidden rounded-2xl border border-porcelain/[0.12] border-t-porcelain/[0.24] bg-[#0E1114]',
+          'shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset,0_28px_72px_-16px_rgba(0,0,0,0.92),0_0_50px_-10px_rgba(20,232,198,0.18)]'
         )}
       >
         {/* ---- Window Titlebar ---- */}
-        <div className="flex h-12 items-center justify-between border-b border-porcelain/[0.07] bg-obsidian/70 px-4 sm:px-6">
+        <div className="flex h-12 items-center justify-between border-b border-porcelain/[0.08] bg-[#0B0E11]/90 px-4 sm:px-6">
           <div className="flex items-center gap-3">
             {/* Citer Mark */}
             <div className="flex items-center gap-2">
@@ -147,14 +154,14 @@ export function ProductPreview() {
         {/* ---- App Body: Sidebar + Main Workspace ---- */}
         <div className="flex min-h-[460px] flex-col md:flex-row">
           {/* Inner Sidebar (hidden on mobile, visible on desktop/tablet) */}
-          <aside className="hidden w-[200px] shrink-0 flex-col border-r border-porcelain/[0.06] bg-obsidian/40 p-4 md:flex">
+          <aside className="hidden w-[200px] shrink-0 flex-col border-r border-porcelain/[0.08] bg-[#0A0D10]/80 p-4 md:flex">
             <div className="flex flex-col gap-4">
               {/* Repository Selector */}
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-wider text-steel/60">
                   Repository
                 </p>
-                <div className="mt-1.5 flex items-center justify-between rounded-lg border border-porcelain/[0.07] bg-porcelain/[0.03] px-2.5 py-1.5 text-porcelain shadow-sm">
+                <div className="mt-1.5 flex items-center justify-between rounded-lg border border-porcelain/[0.08] bg-porcelain/[0.04] px-2.5 py-1.5 text-porcelain shadow-sm">
                   <div className="flex min-w-0 items-center gap-2">
                     <FolderGit2 className="size-3.5 text-mint shrink-0" aria-hidden="true" />
                     <span className="truncate font-mono text-[12px] font-medium">{repoName}</span>
@@ -174,7 +181,7 @@ export function ProductPreview() {
                       className={cn(
                         'flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-left text-[13px] transition-colors',
                         item.active
-                          ? 'bg-porcelain/[0.07] font-medium text-porcelain'
+                          ? 'bg-porcelain/[0.08] font-medium text-porcelain'
                           : 'text-steel hover:bg-porcelain/[0.03] hover:text-porcelain'
                       )}
                     >
@@ -187,15 +194,15 @@ export function ProductPreview() {
             </div>
           </aside>
 
-          {/* Main Workspace Area - Unmistakable Focus on Question → Answer → Cited Code */}
-          <div className="relative flex min-w-0 flex-1 flex-col gap-4 p-4 sm:p-6 lg:p-7">
+          {/* Main Workspace Area */}
+          <div className="relative flex min-w-0 flex-1 flex-col gap-4 bg-[#0C0F12]/70 p-4 sm:p-6 lg:p-7">
             {/* Search / Question Input Bar */}
-            <div className="flex items-center gap-3 rounded-xl border border-porcelain/[0.08] bg-obsidian/90 px-4 py-3 shadow-sm">
+            <div className="flex items-center gap-3 rounded-xl border border-porcelain/[0.1] bg-[#090C0E] px-4 py-3 shadow-sm">
               <Search className="size-4 shrink-0 text-mint" aria-hidden="true" />
               <p className="flex-1 truncate text-[14px] text-porcelain font-normal">
                 {questionText}
               </p>
-              <kbd className="hidden rounded border border-porcelain/[0.1] bg-porcelain/[0.04] px-2 py-0.5 font-mono text-[10.5px] text-steel md:inline-block">
+              <kbd className="hidden rounded border border-porcelain/[0.12] bg-porcelain/[0.05] px-2 py-0.5 font-mono text-[10.5px] text-steel md:inline-block">
                 ⌘K
               </kbd>
             </div>
@@ -203,7 +210,7 @@ export function ProductPreview() {
             {/* Grounded Answer Card with Prominent Interactive Citation */}
             <div
               className={cn(
-                'rounded-xl border border-porcelain/[0.08] bg-surface-raised/95 p-4 sm:p-5 shadow-sm',
+                'rounded-xl border border-porcelain/[0.1] bg-[#13171B] p-4 sm:p-5 shadow-sm',
                 'transition-[opacity,transform] duration-300 ease-out-expo motion-reduce:transition-none',
                 answerVisible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
               )}
@@ -238,7 +245,7 @@ export function ProductPreview() {
             {/* Cited Source Code Pane */}
             <div
               className={cn(
-                'overflow-hidden rounded-xl border border-porcelain/[0.08] bg-obsidian/90 shadow-sm',
+                'overflow-hidden rounded-xl border border-porcelain/[0.1] bg-[#090C0E] shadow-sm',
                 'transition-[opacity,transform] duration-400 ease-out-expo motion-reduce:transition-none',
                 codeVisible ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
               )}
