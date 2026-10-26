@@ -75,5 +75,5 @@ def keyword_search(
         LIMIT :top_k
         """
     )
-    rows = db.execute(stmt, {"q": query, "repo_id": repo_id, "top_k": top_k}).fetchall()
+    rows = db.execute(stmt, {"q": query.replace("\x00", ""), "repo_id": repo_id, "top_k": top_k}).fetchall()
     return [(_row_to_chunk(r), r.score) for r in rows]
